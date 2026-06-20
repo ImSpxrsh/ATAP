@@ -81,3 +81,36 @@ export type VerificationRequestRecord = {
   createdAt: string;
   respondedAt: string | null;
 };
+
+export type PublicCheckRecord = Omit<
+  CheckRecord,
+  "householdId" | "extraction"
+> & {
+  signals: EvidenceExtraction["signals"];
+};
+
+export type HouseholdRecord = {
+  id: string;
+  displayName: string;
+  createdAt: string;
+};
+
+export type TrustedContactRecord = {
+  id: string;
+  householdId: string;
+  displayName: string;
+  phoneE164: string | null;
+  email: string | null;
+  channel: "sms" | "email" | "manual_demo";
+  destinationVerifiedAt: string | null;
+  createdAt: string;
+};
+
+export type PhoneAlertRecord = {
+  id: string;
+  householdId: string;
+  checkId: string;
+  callSidHash: string;
+  pressedDigit: "1";
+  createdAt: string;
+};
