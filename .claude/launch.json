@@ -11,6 +11,17 @@
         "dev"
       ],
       "port": 3000
+    },
+    {
+      "name": "macos-vurse",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "/Users/jananipemmasani/Documents/GitHub/bs/macos-vurse",
+        "run",
+        "dev"
+      ],
+      "port": 5173
     }
   ]
 }
