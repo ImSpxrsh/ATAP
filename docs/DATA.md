@@ -25,6 +25,16 @@ Put in `data/raw/depmap/`:
 
 Heme lines are selected by `OncotreeLineage` matching Myeloid/Lymphoid/Leukemia/Blood/Plasma.
 
+## 1b. cBioPortal live API (no download, no registration — real patients in seconds)
+
+`atap.data.load_cbioportal(study="aml_ohsu_2022")` fetches expression + mutations for the
+~39-gene panel directly from the public cBioPortal REST API — run
+`python scripts/03_score_real.py` to score 671 real BeatAML patients live. **Caveat:** the
+cBioPortal BeatAML study exposes expression and mutations but **not** the venetoclax *ex-vivo*
+AUC (only clinical induction-chemo response). So this route supports real-patient *prediction*
+and internal mechanistic checks, but the venetoclax-response *validation* still needs the
+ex-vivo drug-response table below (Vizome / Bottomly 2022 supplement).
+
 ## 2. BeatAML (primary AML: RNA-seq, WES, ex-vivo venetoclax response)
 
 Tyner et al., *Nature* 2018; Bottomly et al., *Cancer Cell* 2022. Data via the

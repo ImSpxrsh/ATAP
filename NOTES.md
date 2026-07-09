@@ -60,3 +60,35 @@ each work cycle actually did and what the real numbers were (including nulls).
   (shuffle response labels) and a bootstrap CI on the effect, and — critically — **report a null
   plainly if the mechanistic score does not separate responders from resistant on real patients.**
   That negative result would itself be honest, publishable-caliber information.
+
+## Cycle 2 — 2026-07-09 (first real-patient run, Adharv's machine)
+
+- **Ran the ATAP model on real patients for the first time.** Added `atap.data.load_cbioportal()`
+  (live cBioPortal REST API, no download/registration — pulls only the ~39-gene panel, so it's
+  small/fast) and `scripts/03_score_real.py`. Fetched **671 real BeatAML AML patients**
+  (`aml_ohsu_2022`), scored them with the existing mechanistic model.
+- **Real result (671 patients):** predicted quadrants — `standard_of_care` 60.1%,
+  **`salvage_target` 20.7% (139 patients)**, `hard_escape` 19.2%. Internal mechanistic check
+  **holds on real expression**: salvage_target patients carry a substantially lower BAX/BAK
+  effector axis than the rest (**−0.82 vs −0.17**), which is exactly the mechanism the priors
+  encode (low effector competence → ATAP-favored). So the model behaves correctly on real data,
+  not just on the simulator.
+- **What this is NOT (stated plainly):** this is *prediction*, not validation. Two honest limits:
+  (1) **cBioPortal's BeatAML has no venetoclax ex-vivo response** — only clinical induction-chemo
+  response (`RESPONSE_TO_INDUCTION_TX`), the wrong readout — so I cannot yet confirm these 139
+  predicted salvage_targets are actually venetoclax-resistant. That validation needs the
+  Vizome/Bottomly-2022 drug-response supplement (a separate source). (2) The quadrant thresholds
+  are within-cohort percentiles (VENETO_LOW=0.40, ATAP_HIGH=0.60), so the ~20% salvage prevalence
+  is partly threshold geometry, not a strong standalone claim — the **meaningful** real-data
+  finding is the internal-consistency one (salvage_target ⟺ genuinely lower BAX/BAK), not the raw
+  fraction.
+- **Also real and biologically correct:** only **1 BAX/BAK1 loss-of-function mutation** across 671
+  patients — genetic BAX/BAK loss is rare in AML; the common resistance route is expression/
+  functional loss, which is exactly what drives the effector axis here. The model doesn't lean on
+  rare mutations.
+- 4/4 tests still pass; nothing under `data/raw` committed (all fetched live, in memory).
+- **Next:** the make-or-break venetoclax-response validation needs the Vizome supplement — attempt
+  to fetch the Bottomly-2022 ex-vivo AUC table (vizome.org / paper supplement) and join it to
+  these 671 samples, then test whether predicted salvage_targets / low-veneto-axis patients really
+  are the venetoclax-resistant ones, with a permutation null + bootstrap CI. If that table isn't
+  cleanly fetchable, the DepMap CRISPR-BAX-dependency route is the honest alternative validation.

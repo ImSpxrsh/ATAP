@@ -218,6 +218,78 @@ def load_beataml() -> Cohort:
     return Cohort("beataml", expr, muts, meta, response=resp)
 
 
+def load_cbioportal(study: str = "aml_ohsu_2022", timeout: int = 120) -> Cohort:
+    """
+    Fetch a real cohort directly from the public cBioPortal REST API — no local files
+    or registration required. Pulls only the ~39-gene panel, so the request is small.
+
+    Returns expression (samples x panel genes, log2 RPKM for aml_ohsu_2022) and BAX/BAK1/
+    BCL2 mutations. `response` is None: cBioPortal's BeatAML study (aml_ohsu_2022) carries
+    only clinical induction-chemo response, NOT the venetoclax *ex-vivo* AUC the model
+    needs — that readout lives in the Vizome / Bottomly 2022 supplement (see docs/DATA.md),
+    a separate download. So this loader supports real-patient *prediction* and internal
+    mechanistic checks; the venetoclax-response *validation* still requires the supplement.
+    """
+    import json
+    import urllib.request
+
+    api = "https://www.cbioportal.org/api"
+
+    def _post(path: str, body):
+        req = urllib.request.Request(
+            api + path, data=json.dumps(body).encode(),
+            headers={"Content-Type": "application/json"}, method="POST")
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            return json.load(r)
+
+    def _get(path: str):
+        with urllib.request.urlopen(api + path, timeout=timeout) as r:
+            return json.load(r)
+
+    panel = biology.all_genes()
+    genes = _post("/genes/fetch?geneIdType=HUGO_GENE_SYMBOL", panel)
+    sym2ent = {g["hugoGeneSymbol"]: g["entrezGeneId"] for g in genes}
+    ent2sym = {v: k for k, v in sym2ent.items()}
+    all_list = next(s["sampleListId"] for s in _get(f"/studies/{study}/sample-lists")
+                    if s["sampleListId"].endswith("_all"))
+
+    # Expression profile: prefer a continuous RNA-seq profile over z-scores.
+    profiles = _get(f"/studies/{study}/molecular-profiles")
+    expr_prof = next((p["molecularProfileId"] for p in profiles
+                      if p["molecularAlterationType"] == "MRNA_EXPRESSION"
+                      and "zscore" not in p["molecularProfileId"].lower()), None)
+    if expr_prof is None:  # fall back to whatever MRNA profile exists
+        expr_prof = next(p["molecularProfileId"] for p in profiles
+                         if p["molecularAlterationType"] == "MRNA_EXPRESSION")
+    md = _post(f"/molecular-profiles/{expr_prof}/molecular-data/fetch",
+               {"sampleListId": all_list, "entrezGeneIds": list(sym2ent.values())})
+    rows: dict[str, dict[str, float]] = {}
+    for d in md:
+        rows.setdefault(d["sampleId"], {})[ent2sym[d["entrezGeneId"]]] = d["value"]
+    expr = pd.DataFrame(rows).T.astype(float)
+    keep = [g for g in panel if g in expr.columns]
+    expr = expr[keep]
+
+    # Mutations for the effector/gatekeeper genes that drive the model.
+    mut_prof = next((p["molecularProfileId"] for p in profiles
+                     if p["molecularAlterationType"] == "MUTATION_EXTENDED"), None)
+    mutations = pd.DataFrame(columns=["sample", "gene", "variant_class", "protein_change"])
+    if mut_prof is not None:
+        want = [sym2ent[g] for g in ("BAX", "BAK1", "BCL2") if g in sym2ent]
+        muts = _post(f"/molecular-profiles/{mut_prof}/mutations/fetch",
+                     {"sampleListId": all_list, "entrezGeneIds": want})
+        mutations = pd.DataFrame(
+            [{"sample": m["sampleId"], "gene": ent2sym.get(m["entrezGeneId"], ""),
+              "variant_class": m.get("mutationType", ""),
+              "protein_change": m.get("proteinChange", "")} for m in muts],
+            columns=["sample", "gene", "variant_class", "protein_change"])
+
+    meta = pd.DataFrame(index=expr.index)
+    meta["lineage"] = "AML"
+    meta["disease"] = "AML"
+    return Cohort(f"cbioportal:{study}", expr, mutations, meta, response=None)
+
+
 def load_tcga(project: str = "TCGA-LAML") -> Cohort:
     """
     TCGA via GDC. Expected in data/raw/tcga/<project>/:
