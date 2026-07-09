@@ -31,3 +31,32 @@ each work cycle actually did and what the real numbers were (including nulls).
   of which require new data and all of which strengthen the computational spine.
 - **No breakthrough claimed.** A working, reproducible mechanistic predictor validated on
   synthetic data is a real starting point, not a result about real cancer yet.
+
+## Cycle 1 — 2026-07-09 (real-data access de-risked, Adharv's machine)
+
+- **Probed whether real cohort data is fetchable in this environment — it is.** This was the open
+  question blocking the project's key next step. Findings from live probes (not assumptions):
+  - **cBioPortal REST API is reachable** (`https://www.cbioportal.org/api/studies` returns valid
+    JSON) and contains the BeatAML studies: **`aml_ohsu_2018`** (Tyner et al. 2018) and
+    **`aml_ohsu_2022`** (Bottomly et al. 2022). The 2022 study is the one carrying **venetoclax
+    ex-vivo drug response** — i.e. the cohort that can actually test whether predicted
+    `salvage_target`s are the venetoclax-resistant patients (the make-or-break experiment).
+  - The bulk `*.tar.gz` datahub downloads 403 (not usable), but the **API path is viable and, in
+    fact, well-suited here**: the gene panel is only ~39 genes (`atap.biology.all_genes()`), so
+    fetching expression for that panel across all samples via the cBioPortal molecular-data API is
+    small and fast — no need to download multi-GB matrices.
+  - **DepMap figshare direct downloads also work** (a HEAD on a known file 302-redirects to a
+    valid signed S3 URL), so DepMap cell-line expression/mutations/CRISPR-dependency is a viable
+    second real cohort — useful for validating the `effector_competence` axis against real CRISPR
+    BAX/BAK dependency.
+- **Nothing fabricated or downloaded yet** — this cycle only established reachability and the exact
+  route, deliberately not rushing a data loader at the end of a long session where an error could
+  silently corrupt a "real data" result.
+- **Next cycle (concrete handoff):** write `atap.data.load_cbioportal(study="aml_ohsu_2022")` — fetch
+  the ~39-gene expression panel + BAX/BAK1 mutations + the venetoclax drug-response profile via the
+  cBioPortal API, wire it behind the existing `--cohort` flag, run the mechanistic scorer, and test
+  the real question: **do samples the model scores as `salvage_target` / low-venetoclax-axis
+  actually have worse (higher-AUC) venetoclax ex-vivo response?** Ship it with a permutation null
+  (shuffle response labels) and a bootstrap CI on the effect, and — critically — **report a null
+  plainly if the mechanistic score does not separate responders from resistant on real patients.**
+  That negative result would itself be honest, publishable-caliber information.
