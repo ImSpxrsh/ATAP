@@ -28,5 +28,13 @@ what was downloaded so every empirical result is reproducible (GUARDRAILS.md #6)
 - **Drug sensitivity (venetoclax/navitoclax):** PRISM Repurposing / GDSC ABT-199/ABT-263 not yet
   fetched — separate figshare article / GDSC download; TODO next cycle.
 
+## GDSC2 — cell-line BH3-mimetic dose-response (cross-cohort replication)
+- **Source:** cancerrxgene.org release 8.5,
+  `https://cog.sanger.ac.uk/cancerrxgene/GDSC_release8.5/GDSC2_fitted_dose_response_27Oct23.xlsx`
+  saved as `data/raw/gdsc/GDSC2_fitted_dose_response.xlsx` (~21 MB).
+- **Downloaded:** 2026-07-09. 242,036 curve fits; Venetoclax 958 lines, Navitoclax 967 lines
+  (LN_IC50, AUC per SANGER_MODEL_ID). Joined to DepMap heme expression via SangerModelID:
+  **113 heme lines** with venetoclax + expression (115 for navitoclax).
+
 ## Not yet acquired (see docs/DATA.md)
 - GDSC1/GDSC2 dose-response, TCGA (LAML/DLBC), public heme spatial section for M7.

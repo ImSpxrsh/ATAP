@@ -288,3 +288,37 @@ each work cycle actually did and what the real numbers were (including nulls).
   on general-resistance prediction.
 - This figure is the kind of rigorous, defensible centerpiece that strengthens the project by being
   honest about what the model does and doesn't do. No efficacy claims.
+
+## Cycle 10 — 2026-07-09 (CROSS-COHORT REPLICATION — the decisive biology-vs-artifact test)
+
+- **Directly answers the user's single-source-bias worry.** Fetched GDSC2 venetoclax + navitoclax
+  dose-response (cancerrxgene.org release 8.5; MANIFEST updated) and joined it to DepMap heme
+  expression via SangerModelID — **113 heme cell lines** with venetoclax + expression, an INDEPENDENT
+  cohort with entirely different biases from BeatAML (cell lines vs patients, Sanger vs the BeatAML
+  platform, dose-response vs ex-vivo primary-cell assay). `scripts/10_gdsc_replication.py`.
+- **The BCL2/guardian axis REPLICATES cleanly** (predictors vs venetoclax resistance; negative =
+  sensitivity):
+  - BCL2: rho=**−0.45** (LN_IC50), **−0.51** (AUC), perm p=0.000, CIs exclude zero — vs BeatAML's
+    −0.57. Same direction, similar magnitude, independent data.
+  - **BCL2−MCL1 (guardian axis): rho=−0.64 / −0.66** — the STRONGEST predictor, cleaner here than
+    in BeatAML. Navitoclax even stronger (−0.70), mechanistically coherent (BCL2/BCL-XL inhibitor).
+  - composite venetoclax_score: −0.54 (again beaten by the simpler BCL2−MCL1).
+- **The executioner axis is NULL again — now cross-cohort robust:** executioner_loss_score
+  rho≈**0.00 / +0.04** vs venetoclax (perm p=0.70–0.96), CIs straddle zero; same for navitoclax.
+  Identical to BeatAML (+0.02). The ATAP-thesis variable does not predict general BH3-mimetic
+  resistance in EITHER independent cohort.
+- **DECISIVE INTERPRETATION (both directions, honest):**
+  1. **The guardian-axis biology is REAL, not a single-source artifact** — it replicates across two
+     cohorts whose biases do not overlap. Artifacts don't survive that; biology does. This
+     substantially allays the "is it just a BeatAML artifact?" concern. **Caveat:** this is
+     *established* venetoclax-biomarker biology (BCL2:MCL1 balance), literature-consistent, NOT a
+     novel discovery of this project.
+  2. **The executioner/ATAP axis is a robust cross-cohort NULL** for general resistance. The ATAP
+     salvage thesis cannot rest on general-resistance prediction; it rests entirely on the rare,
+     specific executioner-loss subset (acquired resistance / engineered lines) — which no
+     unselected public cohort adequately samples (LIMITATIONS #1).
+- **Cell-line culture-artifact bias still applies (LIMITATIONS #4)** — noted; the replication's
+  strength is that this bias is *different* from BeatAML's, not that it's absent.
+- Net honest position: one solid, cross-cohort-replicated, literature-consistent guardian-axis
+  result (not novel), and a robust cross-cohort null for the project's own central variable. This
+  is what the data actually says. No efficacy claims. No fabrication.
