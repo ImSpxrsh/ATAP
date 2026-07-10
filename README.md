@@ -1,5 +1,9 @@
 # ATAP-M8 — a computational susceptibility map for BAX-independent salvage in BH3-mimetic-resistant blood cancers
 
+[![CI](https://github.com/ImSpxrsh/ATAP/actions/workflows/ci.yml/badge.svg)](https://github.com/ImSpxrsh/ATAP/actions/workflows/ci.yml)
+
+> Reproducible: `make all` runs data → harmonize → analysis → figures; `make test` runs the suite (12 tests).
+
 > **Honesty boundary (load-bearing).** This project predicts *susceptibility from mechanism*.
 > It uses **zero ATAP response data** (none exists for blood cancer). Every susceptibility
 > statement is **predicted, not measured**. **No efficacy is claimed or shown.** See
