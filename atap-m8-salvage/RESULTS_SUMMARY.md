@@ -37,6 +37,25 @@ venetoclax), 221 TCGA cases, 4032 QC-passed spatial spots.
 - **Prior-art:** heme indication appears open in the literature (all prior ATAP work is
   solid-tumor); patent scope unresolved and flagged. [priorart_log.md]
 
+### Three converging nulls that sharpen (not weaken) the thesis
+Independent analyses agree that **executioner loss is orthogonal to the guardian-dependence
+axis that drives *measured* venetoclax resistance** — which is exactly why a BAX-independent
+agent addresses a need current data can't score:
+- **M3:** executioner loss adds ΔR²≈0.0006 beyond guardian confounders.
+- **Pan-BH3-mimetic (GDSC BCL2i/MCL1i/BCL-xLi/pan):** executioner loss does **not** predict
+  class-wide resistance; MCL1i crux test null (β=−0.04, p=0.65). [PANMIMETIC_report.md]
+- **Ablation:** the susceptibility score's venetoclax-resistance signal is **entirely**
+  guardian dependence (DepMap ρ=0.50, BeatAML ρ=0.27); the executioner-deficiency half is
+  ρ≈0.0. [F_ablation, ABLATION_report.md]
+
+**Consequence (the real result):** the executioner-loss axis — where ATAP is mechanistically
+rational — **cannot be validated with cell-line expression data by construction** (BAX/BAK-null
+lines are near-absent; expression is a weak surrogate for functional competence). This is
+direct, quantified evidence that the decisive data is **functional apoptotic priming (BH3
+profiling)** and/or **engineered BAX/BAK-null lines** — the acquisition targets in
+`acquisition/`. The hypothesis is not refuted; it is precisely located beyond the reach of the
+public cell-line correlation, which is a stronger, more honest position than a forced p<0.05.
+
 ## Figure index
 F1 mechanism · F2 study design · F3 prevalence · F4 backbone · F5 confounders ·
 F6 specification curve · F7 stratifier · F8 Beat AML patient-level · F9 spatial
