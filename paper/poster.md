@@ -1,14 +1,18 @@
 # Poster — ATAP-M8 as BAX-independent salvage for BH3-mimetic-resistant blood cancers
 
 > Predict-and-map. **Zero ATAP response data.** Predicted susceptibility, not efficacy.
+> Built **twice independently** — both implementations reach the same conclusion (replication).
 
 ## Narrative arc (§8)
 1. **The class-wide vulnerability [F1].** BH3-mimetics (venetoclax, MCL-1i) all kill through
    BAX/BAK. Lose the executioners → the whole class fails at the executioner step. ATAP-M8
    forms the pore directly, bypassing them (established biology).
-2. **It's real and detectable in patient/line data [F3–F5].** Executioner loss is present
-   across heme lineages (rare, ~2–6%); it points toward venetoclax resistance, but once
-   guardian dependence is controlled it adds little — reported honestly.
+2. **The target population is real and concentrated at relapse.** Executioner (BAX/BAK) loss is
+   rare at diagnosis (~2–5%) but **acquired inactivating BAX mutations reach ~17% at venetoclax
+   relapse** (Moujalled, *Blood* 2023) — exactly the setting that needs a salvage. [F3, F_M1]
+2b. **Honest self-critique (this earns trust).** Our mechanistic composite is **beaten by BCL-2
+   expression alone** (ρ=−0.567), and a **monocytic-differentiation signature dominates**
+   (ρ=+0.721) — independently rediscovering known resistance biology. We report it. [F4–F5]
 3. **It's robust-to-analytic-choice… in its weakness [F6].** 360-spec curve: 77%
    directionally consistent, 0% significant after FDR. The figure bounds the claim.
 4. **Here's the target population [F7–F8].** A BCL-2-family susceptibility composite tracks
@@ -40,6 +44,9 @@
 
 ## Honest bottom line
 The mechanism is sound and the *target-population* and *spatial-routing* layers are real and
-novel. The cell-line executioner-loss→resistance association is weak — which the
-specification curve makes explicit rather than hiding. This is a rationale-and-map, not a
-demonstration of ATAP activity.
+novel. Three independent tests (confounders, pan-BH3-mimetic, ablation) agree the
+executioner-loss axis is **orthogonal to measurable venetoclax resistance** — because BAX/BAK
+loss is rare and concentrated at relapse, and mRNA is a weak proxy for executioner function.
+That is a *signpost*, not a dead end: it names the decisive data (functional BH3 profiling +
+engineered BAX/BAK-null lines) and the one falsifiable bench test. A rationale-and-map that
+knows exactly what would prove it — not a demonstration of ATAP activity.
