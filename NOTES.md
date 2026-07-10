@@ -92,3 +92,37 @@ each work cycle actually did and what the real numbers were (including nulls).
   these 671 samples, then test whether predicted salvage_targets / low-veneto-axis patients really
   are the venetoclax-resistant ones, with a permutation null + bootstrap CI. If that table isn't
   cleanly fetchable, the DepMap CRISPR-BAX-dependency route is the honest alternative validation.
+
+## Cycle 3 — 2026-07-09 (M2 backbone VALIDATED on real patients, Adharv's machine)
+
+- **Got the make-or-break real-data validation, and it holds.** This is module **M2** (the
+  falsifiable core) from the build spec, on the **primary external cohort (BeatAML)**.
+- **What I did:** fetched the BeatAML2 venetoclax **ex-vivo dose-response AUC** table (Bottomly
+  et al. 2022, `biodev/beataml2.0_data`, via the GitHub media/LFS endpoint), reconciled sample IDs
+  cleanly on the `BA####` barcode (cBioPortal `aml_ohsu_2022_2000_BA2123` ↔ drug-table
+  `BA2123R`), and joined it to the model's mechanistic scores. **367 real AML patients** have both
+  the ~39-gene expression panel and a venetoclax AUC. Committed as `scripts/04_validate_beataml.py`.
+- **Real result (the model is NOT fit to the drug data — pure BCL-2-biology prior, so this is
+  genuine out-of-the-box prediction):**
+  - `venetoclax_score` vs venetoclax ex-vivo AUC: **Spearman rho = −0.275, permutation p = 0.0005,
+    95% bootstrap CI [−0.362, −0.183]** — negative exactly as the mechanism predicts (higher
+    predicted-sensitivity axis → lower AUC → genuinely more sensitive), CI excludes zero.
+  - `salvage_index` vs AUC: **rho = +0.278, p = 0.0005, CI [+0.182, +0.366]** — the patients the
+    model flags as ATAP-favored are genuinely the venetoclax-resistant ones.
+  - Responder-vs-resistant separation (outer tertiles): venetoclax_score median **+0.19
+    (sensitive) vs −0.82 (resistant), Mann-Whitney p = 1.1e-07**.
+  - Figure: `results/figures/beataml_backbone.png`.
+- **Honest scope (GUARDRAILS.md #3 — no efficacy claims):** rho ≈ −0.28 is a **real but modest**
+  association (~8% of rank variance) — highly significant and CI-bounded, but not huge. And it
+  validates only the **venetoclax-resistant target population** (the first half of the
+  salvage_target logic). It does **NOT** show ATAP-M8 works on these patients — no ATAP-response
+  data exists anywhere; that remains the wet-lab step. Not a "breakthrough," and not framed as one.
+- **Also added `GUARDRAILS.md`** (spec §1 verbatim) as the rigor contract for all downstream work.
+- **Heads-up / cross-repo issue:** the other instance's commit `1ed0c4e "updated"` pushed **MOSAIC**
+  artifacts into THIS repo by mistake — `poster/mosaic_isef_poster.pdf/pptx` and
+  `results/glioblastoma/aggregate/*` (MOSAIC glioblastoma spatial output). Left in place (did not
+  delete another instance's push), but it's wrong-repo contamination that should be cleaned up.
+- **Next (per build spec backlog):** M1 formal executioner_loss score + M3 confounder decomposition
+  (does executioner state add signal beyond MCL1 / BCL2:BCL-XL ratio / BCL2 gatekeeper mutations on
+  this same BeatAML cohort?), then M4 specification curve over the analytic choices. Foundation
+  files (config.yaml, environment.yml) still to add.
