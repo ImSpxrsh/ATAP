@@ -1,0 +1,111 @@
+# config.yaml — single source of truth for paths, seeds, thresholds, gene panels.
+# No magic numbers in analysis code; everything tunable lives here (GUARDRAILS §6).
+
+seed: 20260710
+
+paths:
+  data_raw: data/raw
+  data_interim: data/interim
+  data_processed: data/processed
+  outputs_figures: outputs/figures
+  outputs_tables: outputs/tables
+  outputs_logs: outputs/logs
+  manifest: data/raw/MANIFEST.md
+
+# ---------------------------------------------------------------------------
+# Gene panels (M1). HGNC symbols; Ensembl mapping resolved in src/panels.py.
+# ---------------------------------------------------------------------------
+panels:
+  executioners: [BAX, BAK1]
+  guardians: [BCL2, MCL1, BCL2L1, BCL2A1, BCL2L2]   # BCL-xL, Bfl-1, Bcl-w
+  sensitizers: [PMAIP1, BBC3, BID, BCL2L11, BAD]     # NOXA, PUMA, BID, BIM, BAD
+  # ATAP-susceptibility signature genes (Task 3 of Overnight spec). Rationale
+  # for each lives in src/signature.py header — do not add genes silently.
+  signature_extra:
+    mito_import: [TIMM23, TIMM17A, TIMM17B, TIMM50, TOMM20, TOMM22, TOMM40, TOMM70]
+    cardiolipin: [CRLS1]
+
+# ---------------------------------------------------------------------------
+# Loss-of-function / executioner-loss thresholds (M1). All decisions logged
+# in DECISIONS.md with reasons.
+# ---------------------------------------------------------------------------
+executioner_loss:
+  # Expression bottom-quantile cutoff for "low" BAX/BAK1 (both must be low).
+  expr_low_quantile: 0.10
+  # Copy-number deep-deletion cutoff. DepMap relative log2(CN/2)+1 style; a
+  # value <= this is treated as deep deletion. Confirmed against real CN
+  # distribution before use (see DECISIONS.md).
+  cn_deep_del_log2: -1.0
+  # Damaging variant classifications (from MAF VariantClassification / VEP).
+  damaging_classes:
+    - Nonsense_Mutation
+    - Frame_Shift_Del
+    - Frame_Shift_Ins
+    - Splice_Site
+    - Translation_Start_Site
+    - Nonstop_Mutation
+  # Continuous score weights (each component in [0,1], score = mean of present components).
+  score_components: [mutation, cn, expression]
+
+# ---------------------------------------------------------------------------
+# M2 backbone association
+# ---------------------------------------------------------------------------
+backbone:
+  drugs: [venetoclax, navitoclax]
+  metrics: [LN_IC50, AUC]
+  # Pre-registered primary spec (see paper/manuscript.md pre-registration block).
+  primary_drug: venetoclax
+  primary_metric: LN_IC50
+  # Hypothesis direction: executioner loss -> resistance -> HIGHER LN_IC50 /
+  # HIGHER AUC (less killing). Positive coefficient is the pre-registered direction.
+  hypothesis_direction: positive
+  covariates: [lineage]
+
+# ---------------------------------------------------------------------------
+# M3 confounders
+# ---------------------------------------------------------------------------
+confounders:
+  genes: [MCL1, BCL2, BCL2L1]     # MCL1 dependence; BCL2/BCL-xL ratio
+  ratio: [BCL2, BCL2L1]            # numerator, denominator for the ratio feature
+  bcl2_hotspots: [G101V, D103Y, D103E, D103V, V156D]  # venetoclax-resistance hotspots
+
+# ---------------------------------------------------------------------------
+# M4 multiverse
+# ---------------------------------------------------------------------------
+multiverse:
+  lof_definitions: [mutation_only, expression_only, cn_only, any_of_three, continuous_score]
+  expr_low_quantiles: [0.05, 0.10, 0.20]
+  drugs: [venetoclax, navitoclax]
+  metrics: [LN_IC50, AUC]
+  lineage_subsets: [all_heme, leukemia_only, lymphoma_only]
+  covariate_sets: [none, lineage, lineage_plus_mcl1]
+  multiple_comparison: fdr_bh
+
+# ---------------------------------------------------------------------------
+# Hematologic lineage filter (DepMap OncotreeLineage / primary disease)
+# ---------------------------------------------------------------------------
+heme_lineages:
+  - Myeloid
+  - Lymphoid
+  - Leukemia
+  - Lymphoma
+  - Myeloma
+  - Blood
+  - Bone Marrow
+
+# ---------------------------------------------------------------------------
+# Data release identifiers — filled in during M0 from actual downloads.
+# Leave as null until the real file is on disk; never guess a release ID.
+# ---------------------------------------------------------------------------
+data_releases:
+  depmap: null        # e.g. "DepMap Public 24Q2" — set from actual download
+  gdsc: null          # e.g. "GDSC2 release 8.5"
+  beataml: null       # e.g. "Vizome / Bottomly 2022 supplement"
+  tcga: null          # download date + GDC/cBioPortal version
+
+spatial:
+  candidates_min: 3
+  qc:
+    min_counts_per_spot: 200
+    min_genes_per_spot: 100
+    require_genes: [BAX, BAK1, BCL2, MCL1]
