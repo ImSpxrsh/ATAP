@@ -322,3 +322,30 @@ each work cycle actually did and what the real numbers were (including nulls).
 - Net honest position: one solid, cross-cohort-replicated, literature-consistent guardian-axis
   result (not novel), and a robust cross-cohort null for the project's own central variable. This
   is what the data actually says. No efficacy claims. No fabrication.
+
+## Cycle 11 — 2026-07-09 (M9 prior-art + biomarker-literature gate)
+
+- **Ran the M9 gate** (dated screening search, `outputs/logs/priorart_log.md`, PROSPERO-style with
+  every query + hits logged). Explicitly a screening search, not a systematic review, not IP advice.
+- **Verdict (a) — ATAP heme indication: plausibly novel, but the strong framing is undercut by our
+  own data.** All located ATAP therapeutic work is solid-tumor (prostate; Ko et al.; ATAP-iRGD-M8
+  xenografts). No publication/trial applying ATAP to leukemia/lymphoma/myeloma or BH3-mimetic
+  resistance found. So the ATAP *heme indication concept* is the candidate novelty. **But** cycles
+  3–10 show the executioner-loss phenotype ATAP targets is rare (~1–2%) and not a mappable general-
+  resistance driver — so "predict-and-map the salvage population" is undercut; the honest novel
+  claim shrinks to *a mechanistically-rational hypothesis for the rare acquired-loss subset, for
+  wet-lab test.* Human + fuller-database confirmation required before any novelty claim.
+- **Verdict (b) — guardian-axis / biomarker results: CONFIRMATORY, not novel.** Cycle 8/9/10
+  findings match established literature closely: monocytic AML → venetoclax-resistant (Pei et al.);
+  BCL2 and BCL2/MCL1-ratio are known mRNA biomarkers; static expression is a modest predictor vs
+  functional BH3 profiling. Reassuring for *correctness* (the pipeline recovers known biology) but
+  NOT a discovery — must never be presented as one. (Aside: BCL2A1 — the gene ATAP derives from —
+  is itself a published monocytic/resistance marker.)
+- **Verdict (c) — patents:** ATAP composition patents held by Rutgers; heme-scope unknown from this
+  search — flagged explicitly as a question for a patent/IP professional, not assessed here.
+- **Why this matters:** M9 lets the project state honestly what IS vs ISN'T novel. The rigor layer
+  (discrimination, replication, honest baselines, M9) now supports a defensible narrative: *the
+  computational analysis correctly recovers established venetoclax biology and, in doing so, shows
+  the ATAP-relevant executioner-loss phenotype is rare and separable — making ATAP a hypothesis for
+  a narrow subset, testable only at the bench, not a validated population map.* No fabrication; the
+  one candidate novelty is conceptual and human-verification-gated.
