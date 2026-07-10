@@ -11,12 +11,12 @@ Rigor contract: [`GUARDRAILS.md`](GUARDRAILS.md). Honest run log: [`NOTES.md`](N
 | M1 | BCL-2 panel + executioner-loss (LOF) logic | **DONE** — `features.executioner_loss_score()` (0–1, redundancy-aware, mutation-or-bottom-decile, no drug data). BeatAML subgroup test underpowered: only n=5 (1.4%) executioner-loss (phenotype rare in primary AML) → direction consistent but non-significant (MWU p=0.32). DepMap heme is the fairer test bed. `scripts/06_m1_executioner_subgroup.py` |
 | M2 | Backbone association (executioner state → venetoclax resistance) | **DONE (real, primary cohort)** — BeatAML n=367: venetoclax_score vs ex-vivo AUC rho=−0.275, perm p=0.0005, 95% CI [−0.362,−0.183]; salvage_index rho=+0.278. Model not fit to drug data. `scripts/04_validate_beataml.py`, fig `beataml_backbone.png` |
 | M3 | Confounder decomposition (MCL1, BCL2:BCL-XL ratio, BCL2 gatekeeper muts) | **DONE — honest NULL.** On BeatAML n=367, executioner state adds ~nothing beyond confounders (ΔR²=+0.001, ΔAIC=+1.6, perm p=0.53, partial Spearman=+0.04). M2's signal is carried by the guardian/MCL1 axis; executioner loss is rare (1 LoF/671) so not a population-level driver. Refines thesis: ATAP niche = rare executioner-loss *subset*, not general resistance. `scripts/05_confounders_m3.py` |
-| M4 | Multiverse / specification curve + stability score | not started — sweep LOF defs × cutoffs × metric (IC50/AUC) × drug × lineage × covariates |
+| M4 | Multiverse / specification curve + stability score | **DONE** — 25-spec curve (predictor×cohort×drug×metric×covariate); guardian effect 100% robust, executioner null 100% robust, composite>BCL2 only 40% (mixed). `scripts/11_spec_curve.py`, `figures/spec_curve.png` |
 | M5 | ATAP-susceptibility stratifier (mechanistic composite, NOT trained on ATAP) | **partial** — two-axis scorer + quadrants in `scoring.py`; validated against real venetoclax resistance in M2 |
 | M6 | Subtype stratification (TCGA/BeatAML prevalence) | not started |
 | M7 | Spatial priming + routing map + per-spot stability | **partial** — `spatial.py` has spot scoring + Moran's I / Getis-Ord; needs a QC'd real heme spatial section + routing index |
 | M8 | Method validation (synthetic ground truth, power, nulls) | **partial** — simulator + recovery tests exist; formal power curves + labeled synthetic-validation figures to add |
-| M9 | Prior-art + IP gate (run EARLY per spec) | **not started — should run soon** (novelty is an output, not an input) |
+| M9 | Prior-art + IP gate (run EARLY per spec) | **DONE (screening)** — `outputs/logs/priorart_log.md`: ATAP heme indication plausibly novel (all prior work solid-tumor/Rutgers-patented) but framed as a wet-lab hypothesis for the rare subset; guardian-axis results confirmatory not novel; patents flagged for a human/IP pro. |
 
 ## Figures (spec F1–F13)
 Done/available: F8-equivalent (`beataml_backbone.png`), the two-axis map, spatial need map.

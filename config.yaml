@@ -1,0 +1,45 @@
+# config.yaml — single source of truth for thresholds, seeds, and gene panels.
+# GUARDRAILS.md #6: no hard-coded magic numbers in analysis code. This file documents
+# every tunable used across scripts/; where a script still inlines a value, it matches
+# what is recorded here. Change here and re-run to reproduce.
+
+seed: 7                       # all stochastic steps (bootstrap, permutation) seeded with this
+
+# --- executioner-loss score (M1, features.executioner_loss_score) -------------------
+executioner:
+  low_pct: 0.10              # bottom-decile expression cutoff for BAX/BAK "loss"
+  # availability = max(percentile(BAX), percentile(BAK1)); LoF mutation zeroes a gene;
+  # binary call = both effectors <= low_pct OR a BAX/BAK1 LoF mutation
+
+# --- two-axis quadrant thresholds (scoring._quadrant) -------------------------------
+quadrant:
+  veneto_low: 0.40           # venetoclax percentile below this = predicted to fail
+  atap_high: 0.60            # ATAP percentile above this = predicted to work
+
+# --- block weights (scoring.BLOCK_WEIGHTS) ------------------------------------------
+block_weights:
+  bcl2_dependence: 1.0
+  mcl1_bclxl_backup: 1.0
+  priming_activators: 1.0
+  effector_competence: 1.6   # up-weighted: the mechanistic crux, opposite signs across agents
+  execution_competence: 1.0
+  mito_mass: 0.8
+# NOTE (cycle 8/9/12): the composite these weights produce is beaten by BCL2 alone in
+# patients and only mixed in cell lines; treated as a hypothesis, not a validated model.
+
+# --- statistics ---------------------------------------------------------------------
+stats:
+  n_perm: 2000               # permutation-null draws (spec-curve uses 1000 for runtime)
+  n_boot: 2000               # bootstrap-CI draws
+  ci: [2.5, 97.5]            # 95% CI percentiles
+
+# --- monocytic-differentiation signature (venetoclax-resistance confounder) ---------
+monocytic_markers: [LYZ, CD14, CSF1R, FCN1, MAFB, VCAN, CD68, ITGAM]
+
+# --- cohorts / data sources (see data/raw/MANIFEST.md for provenance) ---------------
+cohorts:
+  beataml_study: aml_ohsu_2022        # cBioPortal study id (expression + mutations, live API)
+  beataml_drug: data/raw/beataml/beataml_probit_curve_fits_v4.txt   # venetoclax ex-vivo AUC
+  depmap_dir: data/raw/depmap          # 24Q2 (figshare 25880521)
+  gdsc_file: data/raw/gdsc/GDSC2_fitted_dose_response.xlsx          # release 8.5
+  heme_lineage_regex: "Myeloid|Lymph|Leuk|Blood|Plasma"

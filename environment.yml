@@ -1,0 +1,17 @@
+# environment.yml — pinned dependencies for reproducibility (GUARDRAILS.md #6).
+# Versions are exactly those used to produce the committed results (2026-07-09).
+# Reproduce:  conda env create -f environment.yml   (or pip install the pinned versions)
+name: atap
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12.13
+  - pip
+  - pip:
+      - numpy==2.5.1
+      - pandas==3.0.3
+      - scipy==1.18.0
+      - scikit-learn==1.9.0
+      - matplotlib==3.11.0
+      - openpyxl==3.1.5      # reads the GDSC2 .xlsx dose-response file
+      - pyyaml               # reads config.yaml
