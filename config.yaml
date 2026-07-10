@@ -32,12 +32,26 @@ panels:
 executioner_loss:
   # Expression bottom-quantile cutoff for "low" BAX/BAK1 (both must be low).
   expr_low_quantile: 0.10
-  # Copy-number deep-deletion cutoff. DepMap relative log2(CN/2)+1 style; a
-  # value <= this is treated as deep deletion. Confirmed against real CN
-  # distribution before use (see DECISIONS.md).
-  cn_deep_del_log2: -1.0
-  # Damaging variant classifications (from MAF VariantClassification / VEP).
+  # Copy-number deep-deletion cutoff on DepMap OmicsCNGene, which is LINEAR relative
+  # copy number (neutral ~1.0, confirmed: heme BAX median 1.01, min 0.49). A gene with
+  # relative CN <= this is treated as a deep/homozygous deletion. 0.25 ~ log2 -2, the
+  # standard deep-deletion bar; single-copy loss (~0.5) is intentionally NOT counted as
+  # executioner LOF because one intact allele can still make functional protein.
+  cn_deep_del_relative: 0.25
+  # For cBioPortal/TCGA GISTIC calls, deep deletion = -2 (handled in harmonize.py).
+  # Damaging (LOF) consequence tokens. DepMap 24Q4 OmicsSomaticMutations.VariantInfo
+  # uses VEP consequence terms (possibly &-joined); a mutation is damaging if ANY of
+  # these tokens appears. Missense is deliberately excluded (not clearly LOF).
+  # cBioPortal mutationType uses MAF-style names, so both vocabularies are listed.
   damaging_classes:
+    # VEP (DepMap)
+    - stop_gained
+    - frameshift_variant
+    - splice_acceptor_variant
+    - splice_donor_variant
+    - start_lost
+    - stop_lost
+    # MAF (cBioPortal / TCGA)
     - Nonsense_Mutation
     - Frame_Shift_Del
     - Frame_Shift_Ins

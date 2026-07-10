@@ -29,4 +29,24 @@ Format: `YYYY-MM-DD — [module] decision → reason`.
   readout; AUC run as secondary. Direction pre-registered BEFORE M4 to prevent the
   multiverse being read as p-hacking (spec §7).
 
+- **[M1] CN deep-deletion cutoff = relative CN ≤ 0.25 on DepMap OmicsCNGene (LINEAR,
+  neutral≈1.0), NOT log2 −1.0.** → Confirmed against the real distribution: heme BAX/BAK1
+  relative CN is centered at ~1.01 (min 0.49), so the original log2 −1.0 cutoff never
+  fired (scale mismatch — a latent bug that happened to give the right count for the
+  wrong reason). 0.25 (~log2 −2) is the standard deep/homozygous-deletion bar. For
+  TCGA/cBioPortal GISTIC, deep deletion = −2 (separate arm in harmonize.py). Result:
+  0 BAX/BAK1 deep deletions in 348 heme lines — biologically expected; executioner
+  homozygous deletion is rare. Executioner loss in cell lines is therefore driven by
+  the expression (bottom-decile-both) and mutation arms.
+
+- **[M1] Executioner loss is rare (16/348 DepMap heme lines ≈ 4.6%; 15/707 BeatAML).**
+  → Recorded as a real cohort characteristic, not massaged. Low prevalence limits binary
+  power in M2; the continuous expression-based gradient is the primary predictor and the
+  binary call is secondary. This caveat propagates to methods.md Limitations.
+
+- **[M0] BeatAML mutation calls keyed by DNA sample (…D); expression/AUC by RNA sample
+  (…R). Crosswalk built from the probit file's paired dnaseq/rnaseq columns.** → Without
+  it the mutation arm silently contributed nothing. BCL-2-family LOF is rare in AML so
+  impact is small, but the join is now correct.
+
 <!-- Append new decisions below as modules run. Never edit a past entry; add a new dated line. -->

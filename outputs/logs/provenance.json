@@ -1,0 +1,82 @@
+{
+  "depmap::Model.csv": {
+    "file": "Model.csv",
+    "dataset": "DepMap",
+    "source": "figshare article 27993248",
+    "release": "DepMap Public 24Q4 (figshare article 27993248)",
+    "download_date": "2026-07-10",
+    "size_mb": 0.6,
+    "sha256": "b7a0c1385e6cef30132b56aff61f1261d11e3f490490b355c430d32ee0dbdcfa",
+    "notes": ""
+  },
+  "depmap::OmicsExpressionProteinCodingGenesTPMLogp1.csv": {
+    "file": "OmicsExpressionProteinCodingGenesTPMLogp1.csv",
+    "dataset": "DepMap",
+    "source": "figshare article 27993248",
+    "release": "DepMap Public 24Q4 (figshare article 27993248)",
+    "download_date": "2026-07-10",
+    "size_mb": 506.6,
+    "sha256": "3580eeae2c52ab5da758b597bab5a7f9396280a5f9392d1f28e92c436cd30d00",
+    "notes": ""
+  },
+  "depmap::OmicsCNGene.csv": {
+    "file": "OmicsCNGene.csv",
+    "dataset": "DepMap",
+    "source": "figshare article 27993248",
+    "release": "DepMap Public 24Q4 (figshare article 27993248)",
+    "download_date": "2026-07-10",
+    "size_mb": 1394.6,
+    "sha256": "5e6487bfbf01291459a9a21f799ce9e6b96fa4ead4b196df6e9f83ac33282f0b",
+    "notes": ""
+  },
+  "depmap::OmicsSomaticMutations.csv": {
+    "file": "OmicsSomaticMutations.csv",
+    "dataset": "DepMap",
+    "source": "figshare article 27993248",
+    "release": "DepMap Public 24Q4 (figshare article 27993248)",
+    "download_date": "2026-07-10",
+    "size_mb": 338.9,
+    "sha256": "92e86ab6a8457ef99908daf2a2c82d9529320e23cd6c6b7adc128adc1e0f41c8",
+    "notes": ""
+  },
+  "gdsc::GDSC1_fitted_dose_response_24Jul22.csv": {
+    "file": "GDSC1_fitted_dose_response_24Jul22.csv",
+    "dataset": "GDSC",
+    "source": "Sanger FTP release-8.4",
+    "release": "GDSC release-8.4, fitted dose response dated 24Jul22 (Sanger FTP)",
+    "download_date": "2026-07-10",
+    "size_mb": 54.1,
+    "sha256": "7101736651d0f0e3073e55f073f0eb970480706444c96635b7404cb993ee4987",
+    "notes": ""
+  },
+  "gdsc::GDSC2_fitted_dose_response_24Jul22.csv": {
+    "file": "GDSC2_fitted_dose_response_24Jul22.csv",
+    "dataset": "GDSC",
+    "source": "Sanger FTP release-8.4",
+    "release": "GDSC release-8.4, fitted dose response dated 24Jul22 (Sanger FTP)",
+    "download_date": "2026-07-10",
+    "size_mb": 39.8,
+    "sha256": "9d6dc82b9a072bb00b6139dcd6c4c11de1e047f210382fb726e92ab8dd0eae2a",
+    "notes": ""
+  },
+  "gdsc::screened_compounds_rel_8.4.csv": {
+    "file": "screened_compounds_rel_8.4.csv",
+    "dataset": "GDSC",
+    "source": "Sanger FTP release-8.4",
+    "release": "GDSC release-8.4, fitted dose response dated 24Jul22 (Sanger FTP)",
+    "download_date": "2026-07-10",
+    "size_mb": 0.0,
+    "sha256": "d3cbb8b595980b36bf92d54af1da1dd995d2e2ce624c7cc70aacf2a754dce782",
+    "notes": ""
+  },
+  "gdsc::Cell_Lines_Details.xlsx": {
+    "file": "Cell_Lines_Details.xlsx",
+    "dataset": "GDSC",
+    "source": "Sanger FTP release-8.4",
+    "release": "GDSC release-8.4, fitted dose response dated 24Jul22 (Sanger FTP)",
+    "download_date": "2026-07-10",
+    "size_mb": 0.1,
+    "sha256": "5520e779d25469f864de9cc5d42b99bf9632bd346607c0ee6a9ebad7ece17ac3",
+    "notes": ""
+  }
+}
