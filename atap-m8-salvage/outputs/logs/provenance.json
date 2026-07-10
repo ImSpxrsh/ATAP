@@ -78,5 +78,15 @@
     "size_mb": 0.1,
     "sha256": "5520e779d25469f864de9cc5d42b99bf9632bd346607c0ee6a9ebad7ece17ac3",
     "notes": ""
+  },
+  "spatial::lymphnode": {
+    "file": "data/interim/spatial_lymphnode.h5ad (from 10x visium_sge)",
+    "dataset": "10x Human Lymph Node Visium",
+    "source": "scanpy.datasets.visium_sge V1_Human_Lymph_Node (10x Genomics)",
+    "release": "Space Ranger 1.1.0 demo (V1)",
+    "download_date": "2026-07-10",
+    "size_mb": null,
+    "sha256": "",
+    "notes": "4035 spots x 36601 genes; all 6 BCL2-family panel genes expressed; QC-passed"
   }
 }

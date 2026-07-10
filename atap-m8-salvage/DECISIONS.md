@@ -49,4 +49,18 @@ Format: `YYYY-MM-DD — [module] decision → reason`.
   it the mutation arm silently contributed nothing. BCL-2-family LOF is rare in AML so
   impact is small, but the join is now correct.
 
+- **[M7] Spatial section = 10x Genomics V1_Human_Lymph_Node Visium (real, downloadable).**
+  → Candidates considered (≥3, spec §3): (1) 10x V1_Human_Lymph_Node (Visium, lymphoid) —
+  CHOSEN; (2) 10x V1_Breast_Cancer_Block_A (solid-tumor fallback); (3) 10x
+  V1_Mouse_Brain / Parent_Visium_Human_* demos. Lymph node chosen because it is a
+  secondary lymphoid organ (tissue of origin for lymphomas) and all six BCL-2-family panel
+  genes are detectably expressed (BAX 82%, BAK1 61%, BCL2 64%, MCL1 99%, BCL2A1 72%,
+  BCL2L1 56% of spots nonzero) → clears QC as a heme-relevant section. Downloaded via
+  `scanpy.datasets.visium_sge`. Not bone-marrow niche data (see BLOCKERS) — it is
+  lymphoid, so the routing map is a lymphoid-tissue proof-of-concept, honestly scoped.
+
+- **[M7] Routing thresholds: guardian_hi=0.6, exec_lo=0.4 rank cutoffs (primary); swept
+  over {0.5,0.6,0.7}×{0.3,0.4,0.5}×norm{rank,zscore,minmax}×k{0,6,12} = 81 specs for the
+  per-spot S³ stability.** → All in src/spatial.py MULTIVERSE; no magic numbers in figures.
+
 <!-- Append new decisions below as modules run. Never edit a past entry; add a new dated line. -->
