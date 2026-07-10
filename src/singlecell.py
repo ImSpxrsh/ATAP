@@ -107,6 +107,21 @@ def run():
                            "prim_median": float(prim[feat].median()), "p": float(p)}
     pd.DataFrame(tests).T.to_csv(TABLES / "SC_mono_vs_primitive.csv")
 
+    # --- per-patient robustness: does mono>primitive guardian dependence hold in EACH patient? ---
+    per = []
+    for s, sub in mal.groupby("sample"):
+        mo = sub[sub["monocytic"]]; pr = sub[~sub["monocytic"]]
+        if len(mo) >= 10 and len(pr) >= 10:
+            u, p = mannwhitneyu(mo["guardian_dependence"], pr["guardian_dependence"])
+            per.append({"sample": s, "n_mono": len(mo), "n_prim": len(pr),
+                        "mono_guardian": float(mo["guardian_dependence"].median()),
+                        "prim_guardian": float(pr["guardian_dependence"].median()),
+                        "delta": float(mo["guardian_dependence"].median() - pr["guardian_dependence"].median()),
+                        "p": float(p)})
+    per_df = pd.DataFrame(per)
+    per_df.to_csv(TABLES / "SC_per_patient.csv", index=False)
+    n_pos = int((per_df["delta"] > 0).sum()); n_sig = int((per_df["p"] < 0.05).sum())
+
     lines = ["# Single-cell layer — guardian/executioner state across AML cell states",
              f"(van Galen 2019, GSE116256; pooled {df['sample'].nunique()} diagnosis samples, "
              f"{len(df):,} cells, {df['malignant'].sum():,} malignant).", "",
@@ -122,6 +137,14 @@ def run():
               "|---------|------------------|------------------|---|"]
     for f, t in tests.items():
         lines.append(f"| {f} | {t['mono_median']:.3f} | {t['prim_median']:.3f} | {t['p']:.2e} |")
+    lines += ["", f"## Per-patient robustness (not driven by one sample)",
+              f"- Monocytic > primitive guardian dependence in **{n_pos}/{len(per_df)} patients** "
+              f"(direction), significant (p<0.05) in **{n_sig}/{len(per_df)}**.",
+              "", "| sample | n_mono | n_prim | Δ guardian (mono−prim) | p |",
+              "|--------|--------|--------|------------------------|---|"]
+    for _, r in per_df.iterrows():
+        lines.append(f"| {r['sample']} | {int(r['n_mono'])} | {int(r['n_prim'])} | "
+                     f"{r['delta']:+.3f} | {r['p']:.2e} |")
     lines += ["", "**Reading:** if monocytic malignant cells sit in a distinct region of the "
               "guardian/executioner plane (e.g., higher MCL-1 / lower BCL-2 dependence), that is "
               "a single-cell mechanism for the monocytic venetoclax-resistance signature our "

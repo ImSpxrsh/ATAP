@@ -24,4 +24,15 @@
 | executioner_availability | 0.451 | 0.451 | 8.43e-01 |
 | bypass_score | 0.337 | 0.138 | 6.81e-41 |
 
+## Per-patient robustness (not driven by one sample)
+- Monocytic > primitive guardian dependence in **4/5 patients** (direction), significant (p<0.05) in **4/5**.
+
+| sample | n_mono | n_prim | Δ guardian (mono−prim) | p |
+|--------|--------|--------|------------------------|---|
+| AML1012-D0 | 310 | 546 | +0.098 | 3.97e-04 |
+| AML210A-D0 | 233 | 231 | +0.394 | 1.10e-09 |
+| AML328-D0 | 215 | 478 | +0.337 | 1.68e-14 |
+| AML329-D0 | 18 | 235 | +0.000 | 2.56e-01 |
+| AML419A-D0 | 581 | 487 | +0.219 | 4.79e-35 |
+
 **Reading:** if monocytic malignant cells sit in a distinct region of the guardian/executioner plane (e.g., higher MCL-1 / lower BCL-2 dependence), that is a single-cell mechanism for the monocytic venetoclax-resistance signature our bulk discrimination battery flagged — intratumoral heterogeneity in the exact axis the framework scores. Expression-based cell-state map; no efficacy claim.
