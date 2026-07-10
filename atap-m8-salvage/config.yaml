@@ -98,10 +98,66 @@ heme_lineages:
 # Leave as null until the real file is on disk; never guess a release ID.
 # ---------------------------------------------------------------------------
 data_releases:
-  depmap: null        # e.g. "DepMap Public 24Q2" — set from actual download
-  gdsc: null          # e.g. "GDSC2 release 8.5"
-  beataml: null       # e.g. "Vizome / Bottomly 2022 supplement"
-  tcga: null          # download date + GDC/cBioPortal version
+  depmap: "DepMap Public 24Q4 (figshare article 27993248)"
+  gdsc: "GDSC release-8.4, fitted dose response dated 24Jul22 (Sanger FTP)"
+  beataml: "cBioPortal aml_ohsu_2022 (Beat AML, OHSU Cancer Cell 2022) — expression/mutation via API; ex vivo drug response resolved separately (see MANIFEST/BLOCKERS)"
+  tcga: "cBioPortal REST API — laml_tcga_pan_can_atlas_2018 + dlbc_tcga_pan_can_atlas_2018 (PanCancer Atlas)"
+
+# Exact DepMap 24Q4 figshare file IDs (download via https://ndownloader.figshare.com/files/<id>)
+depmap_files:
+  Model.csv: 51065297
+  OmicsExpressionProteinCodingGenesTPMLogp1.csv: 51065489
+  OmicsCNGene.csv: 51065324
+  OmicsSomaticMutations.csv: 51065732
+  CRISPRGeneEffect.csv: 51064667
+
+gdsc_base: "https://ftp.sanger.ac.uk/pub/project/cancerrxgene/releases/release-8.4"
+gdsc_files:
+  - GDSC1_fitted_dose_response_24Jul22.csv
+  - GDSC2_fitted_dose_response_24Jul22.csv
+  - screened_compounds_rel_8.4.csv
+  - Cell_Lines_Details.xlsx
+
+cbioportal_api: "https://www.cbioportal.org/api"
+tcga_studies:
+  LAML: laml_tcga_pan_can_atlas_2018
+  DLBC: dlbc_tcga_pan_can_atlas_2018
+beataml_study: aml_ohsu_2022
+
+# Beat AML 2.0 native data (biodev/beataml2.0_data) — self-consistent dbgap IDs so
+# ex vivo inhibitor AUC links to RNA-seq. This is the primary BeatAML source for the
+# patient-level venetoclax analysis (F8); cBioPortal aml_ohsu_2022 is a cross-check.
+beataml2_base: "https://github.com/biodev/beataml2.0_data/raw/main"
+beataml2_files:
+  - beataml_wv1to4_clinical.xlsx
+  - beataml_waves1to4_norm_exp_dbgap.txt
+  - beataml_wes_wv1to4_mutations_dbgap.txt
+  - beataml_probit_curve_fits_v4_dbgap.txt
+  - beataml_drug_families.xlsx
+  - beataml_waves1to4_sample_mapping.xlsx
+
+# Entrez IDs for panel genes (cBioPortal fetches by entrezGeneId). Resolved from HGNC.
+entrez_ids:
+  BAX: 581
+  BAK1: 578
+  BCL2: 596
+  MCL1: 4170
+  BCL2L1: 598
+  BCL2A1: 597
+  BCL2L2: 599
+  PMAIP1: 5366
+  BBC3: 27113
+  BID: 637
+  BCL2L11: 10018
+  BAD: 572
+  CRLS1: 54675
+  TIMM23: 100287932
+  TIMM17A: 10440
+  TIMM50: 92609
+  TOMM20: 9804
+  TOMM22: 56993
+  TOMM40: 10452
+  TOMM70: 9868
 
 spatial:
   candidates_min: 3
