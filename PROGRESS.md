@@ -23,6 +23,15 @@ Done/available: F8-equivalent (`beataml_backbone.png`), the two-axis map, spatia
 Not yet: F1 mechanism schematic, F3 prevalence, F4 forest, F5 confounder, F6 spec-curve, F7 ridgeline,
 F9/F10 spatial, F11/F12 synthetic-validation, F2/F13 schematics.
 
+## Model critique (cycle 8 — must not be buried)
+Discrimination battery on the M2 BeatAML result: the composite venetoclax_score (rho=−0.275) is
+**beaten by BCL2 expression alone (rho=−0.567)**; its biological sign/weight structure is
+**indistinguishable from random** (sign-scramble rank 10/32; random-weights p=0.32); and a
+**monocytic-differentiation signature is the dominant predictor (rho=+0.721)**. The BCL-2 signal is
+real (survives the monocytic confound, partial rho=−0.204) but modest and BCL2-driven — the
+multi-block "mechanistic" composite is not empirically justified and should be reported against a
+BCL2 + monocytic baseline. `scripts/08_discrimination.py`.
+
 ## Key results so far (all real data, honestly scoped)
 - **M2 backbone holds on real patients** (see table). Validates the venetoclax-RESISTANT *target
   population*; per GUARDRAILS #3 this does NOT show ATAP-M8 efficacy — no ATAP-response data exists.

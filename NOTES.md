@@ -235,3 +235,36 @@ each work cycle actually did and what the real numbers were (including nulls).
   and clarifies* the claim rather than inflating it. This is what a defensible project looks like:
   one real effect, honestly bounded, with the negative space mapped.
 - No efficacy claims. DepMap cell-line culture-artifact bias (LIMITATIONS #4) noted.
+
+## Cycle 8 — 2026-07-09 (BIOLOGY-vs-ARTIFACT discrimination — the important one)
+
+- **Prompted by a direct challenge ("is the model learning biology or a shortcut?"), ran the
+  discrimination battery** on the M2 BeatAML result (`scripts/08_discrimination.py`, n=367). Four
+  tests; results substantially REVISE the project's standing — reported in full, unspun.
+- **1. Single-gene baseline — the composite FAILS it.** BCL2 expression *alone*: rho=**−0.567** vs
+  venetoclax AUC — more than **2× stronger** than the full mechanistic composite (−0.275). MCL1
+  alone: +0.264 (correct direction). The composite does NOT beat the best single gene; it
+  **dilutes** BCL2 with near-noise from the other blocks (PMAIP1 −0.01, BAX −0.07, BAK1 +0.07).
+  **The multi-block architecture is a net negative on this data.**
+- **2. Sign-scramble null — biology not special.** True biological signs rank **10/32** exhaustive
+  sign patterns; 9 arbitrary patterns predict as well or better.
+- **3. Random-weights null — p=0.32.** Random sign+magnitude vectors on the same blocks match the
+  biological weighting ~1/3 of the time. The specific weights/signs aren't doing the work.
+- **4. Monocytic-differentiation confound — the dominant real signal.** A monocytic signature
+  (LYZ/CD14/CSF1R/FCN1/MAFB/VCAN/CD68/ITGAM) predicts venetoclax AUC at rho=**+0.721** — far
+  stronger than the whole BCL-2 model (0.72 vs 0.28), matching known monocytic-resistance biology.
+  **But** the BCL-2 signal SURVIVES partialling it out (partial rho=−0.204, ~74% retained) — NOT
+  purely a differentiation proxy.
+- **HONEST SYNTHESIS (biology or artifact? — both, disentangled):** the model learns SOME real
+  BCL2 biology (survives the confound; single-gene directions correct and strong), but the two-axis
+  COMPOSITE is not empirically justified here — beaten by BCL2 alone, its weighting indistinguishable
+  from random, and the strongest predictor in the data is a differentiation-state axis it only
+  weakly proxies.
+- **Consequences (concrete):** (a) always report a BCL2 + monocytic simple baseline as the
+  comparator the composite must beat (currently doesn't); (b) the "mechanistic two-axis model" is
+  overclaimed for the venetoclax axis — narrow the claim to "BCL2/MCL1 carry real, literature-
+  consistent signal"; (c) reinforces that the ATAP thesis rests on the *rare executioner-loss
+  subset*, not general resistance (already shown rare/null in M3/M1); (d) M4 spec-curve + M5 must
+  include these baselines + the monocytic control as first-class comparators.
+- Recorded prominently because it undermines part of the model design — surfacing, not burying, is
+  the guardrail. No efficacy claims; ex-vivo resistance only.
