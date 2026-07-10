@@ -206,3 +206,32 @@ each work cycle actually did and what the real numbers were (including nulls).
   navitoclax resistance? Both with permutation null + bootstrap CI, honest null if not, and report
   the real executioner-loss n (should be >> BeatAML's 5, since cell lines carry genetic loss).
 - No efficacy claims. No biological number reported from synthetic data.
+
+## Cycle 7 — 2026-07-09 (DepMap heme test — two honest nulls that sharpen the picture)
+
+- **DepMap 24Q2 downloaded and analyzed** (228 heme lines with expression + CRISPR;
+  `scripts/07_depmap_executioner.py`). Two real results, both nulls, both informative:
+- **(A) The executioner-loss phenotype is rare even in cell lines: 6/228 (2.6%)** vs BeatAML
+  5/367 (1.4%). Modestly more common, but the DepMap "fairer test bed" only partly delivered —
+  genetic BAX/BAK loss is uncommon across BOTH primary AML and cell lines. This is a real,
+  reportable constraint: the ATAP-salvage phenotype is genuinely rare in *unselected* cohorts, and
+  no amount of public omics substitutes for a cohort enriched for acquired resistance (relapsed-
+  post-venetoclax) or an engineered BAX-deficient line.
+- **(B) The expression-based executioner proxy does NOT track functional CRISPR dependency**
+  (n=121 with both): Spearman(BAX expr, BAX gene-effect)=+0.07 (perm p=0.46, 95% CI [−0.12,+0.26]);
+  BAK1=−0.10 (p=0.29, CI [−0.28,+0.08]). Both CIs include zero — null. **But interpreted honestly:
+  this null is expected and is more about the readout than the proxy** — DepMap CRISPR gene-effect
+  measures *proliferation fitness*, and pro-apoptotic effectors are near-neutral for growth (BAX
+  gene-effect median +0.12, i.e. KO mildly *helps*), so a fitness screen is intrinsically a weak
+  readout of *apoptotic*-executioner dependency. Directly confirms LIMITATIONS.md #3 (mRNA ≠
+  functional state) on real data, and adds: CRISPR-fitness ≠ apoptotic dependency either.
+- **Consequence:** the clean DepMap test is **BH3-mimetic drug sensitivity** (does executioner
+  state predict venetoclax/navitoclax resistance in heme lines?) — the direct analog of the M2
+  BeatAML result, now in a second cohort. That needs PRISM Repurposing / GDSC ABT-199/ABT-263
+  (separate download), the top priority next cycle. The continuous test (executioner axis vs drug
+  AUC) will be far better powered than the 6-line subset.
+- **Honest running tally:** M2 = real positive (composite predicts ex-vivo venetoclax resistance).
+  M3, M1-subgroup, DepMap-(A), DepMap-(B) = four honest nulls/constraints, each of which *narrows
+  and clarifies* the claim rather than inflating it. This is what a defensible project looks like:
+  one real effect, honestly bounded, with the negative space mapped.
+- No efficacy claims. DepMap cell-line culture-artifact bias (LIMITATIONS #4) noted.
