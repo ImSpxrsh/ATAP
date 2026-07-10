@@ -1,0 +1,2 @@
+side,n_spots,effect,noise,roc_auc,accuracy,mean_stability_region,mean_stability_background
+40,1600,2.0,0.6,0.9998705104908084,0.9025,0.9995399125833908,0.6853524824337889
