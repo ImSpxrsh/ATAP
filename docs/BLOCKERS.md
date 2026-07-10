@@ -37,6 +37,16 @@ Format: `[task] blocker → what was tried → what a human must decide/do`.
    unproven). → **A human should confirm whether/how to weight them** before they enter a
    results claim.
 
+
+6. **[CLL generalization] PACE/Dietrich CLL expression matrix needs R to unlock.**
+   → Downloaded BloodCancerMultiOmics2017 (Bioconductor); extracted venetoclax ex-vivo response
+   for **184 CLL patients** in pure Python (`src/pace_cll.py` → `data/processed/pace_cll_venetoclax.csv`).
+   But baseline BCL-2-family EXPRESSION (needed for the guardian/executioner axes) is stored in an
+   R `DESeqDataSet` (`dds.RData`) that pyreadr/rdata cannot parse. → **A human should run a one-off
+   R export** (`assay(dds)` + `rowData` symbols → CSV) or install rpy2, to complete the second-disease
+   (CLL) validation of the framework. This is the single cheapest way to move from "one disease (AML)"
+   to "generalizes across blood cancers." No new data access required — the data is already downloaded.
+
 ## Resolved during the run
 - **SSL cert failures in urllib** → switched network layer to `requests` (certifi).
 - **DepMap CN scale** → OmicsCNGene is linear relative CN, not log2; cutoff corrected to

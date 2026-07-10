@@ -31,6 +31,17 @@ volume/page and confirm each citation against the source before submission.
 9. **Montero J, Letai A.** Why do BCL-2 inhibitors work and where should we use them? (BH3 profiling
    framework.) *(General reference for dynamic BH3 profiling.)*
 
+## External validation of the guardian/BCL-2-dependence axis
+10a. **Chong SJF, Lu J, Valentin R, Lehmberg TZ, et al.** BCL-2 dependence is a favorable
+    predictive marker of response to therapy for chronic lymphocytic leukemia. ***Molecular
+    Cancer*** 2025;24 (PMC11874845). *(127 CLL patients: BH3-profiling-measured BCL-2 dependence
+    predicts venetoclax/BTKi response — independent, cross-disease support for our guardian-axis
+    finding AND for BH3 profiling as the functional readout we argue is needed.)*
+10b. **Dietrich S, Oleś M, Lu J, et al.** Drug-perturbation-based stratification of blood
+    cancer. ***J Clin Invest*** 2018;128(1):427–445. *(The PACE cohort / BloodCancerMultiOmics2017
+    Bioconductor package: ex-vivo venetoclax response + genetics + RNA-seq for CLL and other blood
+    cancers — our second-disease generalization resource; 184 CLL venetoclax responses staged.)*
+
 ## Venetoclax resistance mechanisms / confounders
 10. **Pei S, Pollyea DA, … Jordan CT.** Monocytic subclones confer resistance to venetoclax-based
     therapy in AML. ***Cancer Discovery*** 2020. *(Monocytic differentiation → venetoclax resistance;
