@@ -75,12 +75,21 @@ via a 25-specification curve (executioner effect 100% robustly null).
 dominates** (ρ=+0.721) — independently recovering a known biological axis of venetoclax resistance,
 which validates the pipeline while bounding the composite's novelty.
 
-**3.4 The susceptibility map and spatial routing.** The composite tracks observed venetoclax
+**3.4 A calibrated decision boundary ("tipping point").** Rather than assert an (unsupportable)
+physical threshold, we fit the logistic boundary that separates venetoclax responders from
+non-responders in the two-axis (guardian × executioner) plane and bootstrap it. The boundary
+predicts response (DepMap AUC=0.75, Beat AML AUC=0.64) and is **driven by the guardian axis**
+(β_guardian=+0.97 [+0.58,+1.42] DepMap, +0.48 [+0.27,+0.70] Beat AML — CIs exclude 0), while the
+**executioner axis coefficient is ~0** (CIs span 0). The response "tipping point" is thus a
+guardian-dependence threshold (~0.47–0.54 rank, bootstrap CI reported), and the executioner axis —
+the mechanistic ATAP modifier — is explicitly the part these data cannot resolve.
+
+**3.5 The susceptibility map and spatial routing.** The composite tracks observed venetoclax
 resistance (DepMap ρ=0.34; Beat AML ρ=0.23) and stratifies subtypes; on real lymphoid tissue,
 ~16% of spots are "bypass-required" (guardian-dependent yet executioner-low) with quantified
 per-spot stability — reframing executioner availability as a spatial routing question.
 
-**3.5 Method validation and prior art.** Synthetic recovery reaches ROC-AUC=1.0 and recovered
+**3.6 Method validation and prior art.** Synthetic recovery reaches ROC-AUC=1.0 and recovered
 spatial structure beats a permutation null (p=0.001). Prior-art search finds the hematologic ATAP
 indication literature-open (all prior work solid-tumor); patent scope is flagged for IP counsel.
 
