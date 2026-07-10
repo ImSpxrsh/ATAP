@@ -114,6 +114,67 @@ def build_feature_blocks(
     return blocks
 
 
+def executioner_loss_score(
+    expr: pd.DataFrame,
+    mutations: pd.DataFrame | None = None,
+    low_pct: float = 0.10,
+) -> pd.DataFrame:
+    """
+    M1 — a transparent per-sample executioner-loss score, defined ONLY from BAX/BAK
+    genomic/expression state (never from drug response or ATAP data), so it can be used
+    as an independent stratifier.
+
+    Executioners are redundant: EITHER BAX or BAK1 suffices to form the pore. So
+    executioner *availability* = the higher of the two genes' within-cohort expression
+    percentiles, and a loss-of-function mutation drives that gene's contribution to 0.
+
+        executioner_loss_score = 1 - max(avail_BAX, avail_BAK1)   in [0, 1]
+            (0 = at least one effector abundant; 1 = both absent/lost)
+
+    Binary call (documented, config-ready threshold ``low_pct``, default bottom decile):
+        executioner_loss = (score >= 1 - low_pct)  OR  a BAX/BAK1 LoF mutation
+        i.e. BOTH effectors below the ``low_pct`` expression percentile, or a truncating
+        mutation in one with the other also low.
+
+    Returns a DataFrame indexed by sample with columns:
+        avail_bax, avail_bak1, executioner_loss_score, executioner_loss (0/1), evidence.
+    """
+    def _pct(col: str) -> pd.Series:
+        if col not in expr.columns:
+            return pd.Series(1.0, index=expr.index)  # gene absent -> assume available (conservative)
+        return expr[col].rank(pct=True)
+
+    avail_bax = _pct("BAX")
+    avail_bak1 = _pct("BAK1")
+
+    bax_lof = pd.Series(False, index=expr.index)
+    bak1_lof = pd.Series(False, index=expr.index)
+    if mutations is not None and len(mutations):
+        m = mutations.copy()
+        m["gene"] = m["gene"].astype(str).str.upper()
+        lof = m["variant_class"].astype(str).str.lower().isin(biology.LOSS_OF_FUNCTION_CLASSES)
+        bax_lof.loc[bax_lof.index.isin(m.loc[lof & (m.gene == "BAX"), "sample"].unique())] = True
+        bak1_lof.loc[bak1_lof.index.isin(m.loc[lof & (m.gene == "BAK1"), "sample"].unique())] = True
+
+    avail_bax = avail_bax.where(~bax_lof, 0.0)
+    avail_bak1 = avail_bak1.where(~bak1_lof, 0.0)
+
+    availability = np.maximum(avail_bax.values, avail_bak1.values)
+    score = pd.Series(1.0 - availability, index=expr.index)
+
+    low_expr_both = (avail_bax <= low_pct) & (avail_bak1 <= low_pct)
+    has_lof = bax_lof | bak1_lof
+    call = (low_expr_both | (has_lof & (np.minimum(avail_bax, avail_bak1) <= low_pct))).astype(int)
+    evidence = np.where(has_lof, "mutation",
+                        np.where(low_expr_both, "bottom_decile_expr", "none"))
+
+    return pd.DataFrame({
+        "avail_bax": avail_bax, "avail_bak1": avail_bak1,
+        "executioner_loss_score": score, "executioner_loss": call,
+        "evidence": evidence,
+    }, index=expr.index)
+
+
 def add_crispr_dependency(
     blocks: pd.DataFrame,
     dep: pd.DataFrame | None,

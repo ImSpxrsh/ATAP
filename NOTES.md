@@ -157,3 +157,29 @@ each work cycle actually did and what the real numbers were (including nulls).
   treating executioner state as a general predictor. Also worth testing on DepMap heme cell lines
   where genetic BAX/BAK loss + CRISPR dependency may be better represented than in primary AML.
 - No efficacy claims made. PROGRESS.md M3 updated to done (null).
+
+## Cycle 5 — 2026-07-09 (M1 executioner-loss score + underpowered subgroup, Adharv's machine)
+
+- **Implemented M1** `features.executioner_loss_score()` — a transparent 0–1 per-sample score
+  defined purely from BAX/BAK state (redundancy-aware: availability = max of the two effectors'
+  within-cohort expression percentiles; a LoF mutation zeroes that gene; binary call = both
+  effectors in the bottom decile OR a LoF). Defined WITHOUT any reference to drug/ATAP data, so it
+  is a clean independent stratifier. `scripts/06_m1_executioner_subgroup.py`. 4/4 tests still pass.
+- **Subgroup test on real BeatAML (n=367) — the honest follow-up to the M3 null:** is the isolated
+  executioner-loss subset enriched in the venetoclax-resistant tail? **Result: underpowered, cannot
+  conclude.** The executioner-loss subset is **n=5 (1.4%)** — and all 5 are bottom-decile-expression
+  calls (essentially zero genetic BAX/BAK loss in primary AML, consistent with cycle 2's 1 LoF/671).
+  Direction is *weakly* consistent with the hypothesis (loss median venetoclax AUC 164.1 vs 157.9,
+  i.e. slightly more resistant, gap +6.2) but **not significant and not interpretable at n=5**:
+  Mann-Whitney p=0.32, permutation p=0.45, Fisher OR=inf but p=0.50 (only 2 loss cases in the
+  tested tertiles). Reported as underpowered, not spun into a positive.
+- **What this establishes (honestly):** primary AML is the **wrong cohort** to test the specific
+  ATAP-salvage subset, because the executioner-loss phenotype is too rare there (~1%). This isn't a
+  failure of the hypothesis — it's a correct identification of where the hypothesis *can* be tested.
+  The M1 score works and is clean; the cohort just lacks the phenotype.
+- **Clear next step (now the top empirical priority):** the **DepMap heme route** — cell lines carry
+  genetic BAX/BAK deletions and CRISPR BAX/BAK gene-effect (real functional executioner dependency),
+  so the executioner-loss phenotype is far better represented than in primary AML. Test there
+  whether executioner state tracks (a) real CRISPR BAX/BAK dependency and (b) venetoclax/navitoclax
+  resistance (GDSC/PRISM), with null + CI. DepMap figshare downloads verified reachable in cycle 1.
+- PROGRESS.md updated: M1 done (score implemented; BeatAML subgroup underpowered → DepMap next).
