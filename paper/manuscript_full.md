@@ -89,7 +89,20 @@ resistance (DepMap ρ=0.34; Beat AML ρ=0.23) and stratifies subtypes; on real l
 ~16% of spots are "bypass-required" (guardian-dependent yet executioner-low) with quantified
 per-spot stability — reframing executioner availability as a spatial routing question.
 
-**3.6 Method validation and prior art.** Synthetic recovery reaches ROC-AUC=1.0 and recovered
+**3.6 Single-cell resolution (van Galen AML atlas).** Across 3,434 malignant cells from 8 AML
+patients, monocytic malignant cells occupy a distinct region of the guardian/executioner plane:
+markedly higher MCL-1 (median 1.45 vs 0.0, p=8×10⁻⁶⁴) and guardian dependence (0.67 vs 0.25,
+p=1×10⁻⁶⁹) than primitive (HSC/Prog/GMP-like) cells, with **identical** executioner availability
+(p=0.84). This provides a single-cell mechanism for the monocytic venetoclax-resistance signature
+identified in §3.3 — intratumoral heterogeneity concentrated on the guardian (MCL-1) axis — and
+independently recovers established monocytic-resistance biology.
+
+**3.7 Prognostic layer (Beat AML, n=649).** The mechanistic score is not an independent
+prognostic marker: a crude executioner-availability survival association (HR 0.86, p=0.004) is
+confounded by ELN2017 risk and age and is null after adjustment (HR 0.94, p=0.25) — confirming
+the score indexes drug-response biology, not prognosis.
+
+**3.8 Method validation and prior art.** Synthetic recovery reaches ROC-AUC=1.0 and recovered
 spatial structure beats a permutation null (p=0.001). Prior-art search finds the hematologic ATAP
 indication literature-open (all prior work solid-tumor); patent scope is flagged for IP counsel.
 

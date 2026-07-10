@@ -48,6 +48,17 @@ See [`ARCHITECTURE.md`](ARCHITECTURE.md) for the full tech stack and how each pi
   executioner axis is orthogonal to measured venetoclax resistance. *(extended; F5, ablation, PANMIMETIC)*
 - **Spatial routing** on real 10x Human Lymph Node Visium: 16% "bypass-required" spots, per-spot
   S³ stability. *(extended; F9, F10)* Plus glioblastoma spatial stability. *(core; `results/glioblastoma/`)*
+- **Single-cell layer (van Galen AML atlas, 3,434 malignant cells):** monocytic malignant cells
+  occupy a distinct **MCL-1-high, guardian-dependent** state (MCL1 p=8×10⁻⁶⁴; guardian dependence
+  0.67 vs 0.25, p=1×10⁻⁶⁹) with **identical executioner availability** — a single-cell mechanism
+  for the monocytic venetoclax-resistance signature, in the exact axis the framework scores.
+  *(extended; F_singlecell)* **The strongest positive result — independently recovers known
+  MCL1-driven monocytic resistance biology at single-cell resolution.**
+- **Prognostic layer (BeatAML, n=649):** the mechanistic score is a drug-response axis, **not** an
+  independent prognostic marker — the crude executioner-survival signal (HR 0.86, p=0.004) is
+  confounded and null after ELN2017/age adjustment. *(extended; F_survival — honest rigor)*
+- **Cross-disease external validation:** BCL-2 dependence predicts venetoclax response in an
+  independent CLL cohort (Chong 2025); 184 CLL venetoclax responses staged (PACE/Dietrich).
 - **Methods validated** synthetically (recovery ROC-AUC=1.0; permutation nulls). *(extended; F11, F12)*
 - **Prior-art gate:** heme indication appears literature-open (all prior ATAP work solid-tumor);
   patent scope flagged for IP counsel. *(both; `outputs/logs/priorart_log.md`)*
