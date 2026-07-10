@@ -183,3 +183,26 @@ each work cycle actually did and what the real numbers were (including nulls).
   whether executioner state tracks (a) real CRISPR BAX/BAK dependency and (b) venetoclax/navitoclax
   resistance (GDSC/PRISM), with null + CI. DepMap figshare downloads verified reachable in cycle 1.
 - PROGRESS.md updated: M1 done (score implemented; BeatAML subgroup underpowered → DepMap next).
+
+## Cycle 6 — 2026-07-09 (LIMITATIONS.md + DepMap download kicked off, Adharv's machine)
+
+- **Wrote `LIMITATIONS.md`** — a ranked, honest account of the data biases (prompted by a direct
+  "how is this data biased?" question and required by the guardrails). The load-bearing one:
+  **BeatAML is diagnosis/treatment-naive primary AML, which structurally lacks the acquired
+  BAX/BAK-loss phenotype** ATAP targets (1 LoF/671; 5 low-expr/367) — so the M3/M1 nulls are partly
+  a statement about the cohort, not only the biology. Also: ex-vivo AUC ≠ clinical response;
+  mRNA ≠ functional executioner loss; drug-testable-subset + academic-center selection; and the
+  DepMap route trades the "phenotype-too-rare" bias for a "cell-line-culture-artifact" bias (stated
+  up front). These aren't disclaimers — they're the honest justification for the DepMap route and
+  the wet-lab step.
+- **Kicked off the DepMap 24Q2 download** (figshare article 25880521) into `data/raw/depmap/`
+  (gitignored): Model.csv (done, 296 heme cell lines), CRISPRGeneEffect.csv (done, 419 MB),
+  Expression + Mutations downloading in background (~775 MB). Wrote `data/raw/MANIFEST.md` with exact
+  figshare file IDs + release + date (force-added since data/raw is gitignored). DepMap venetoclax/
+  navitoclax drug sensitivity (PRISM/GDSC) still to fetch separately.
+- **Next cycle (once download completes):** run the fair executioner-loss test on 296 heme cell
+  lines — (a) does M1 executioner_loss_score / low BAX-BAK expression track real CRISPR BAX/BAK
+  gene-effect dependency? (b) with drug data, does executioner state associate with venetoclax/
+  navitoclax resistance? Both with permutation null + bootstrap CI, honest null if not, and report
+  the real executioner-loss n (should be >> BeatAML's 5, since cell lines carry genetic loss).
+- No efficacy claims. No biological number reported from synthetic data.
