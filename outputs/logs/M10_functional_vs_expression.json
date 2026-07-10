@@ -1,0 +1,16 @@
+{
+  "n_venetoclax_lines": 113,
+  "seed": 7,
+  "perm_iters": 5000,
+  "boot_iters": 5000,
+  "guardians": [
+    "BCL2",
+    "MCL1",
+    "BCL2L1"
+  ],
+  "executioners": [
+    "BAX",
+    "BAK1"
+  ],
+  "convention": "functional dependence = -CRISPR gene_effect; sensitivity marker -> negative rho with LN_IC50"
+}

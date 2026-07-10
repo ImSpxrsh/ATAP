@@ -372,3 +372,32 @@ each work cycle actually did and what the real numbers were (including nulls).
   executioner/ATAP axis is a robust null for general resistance — are each 100% stable across the
   multiverse. That is exactly the kind of robustness evidence that makes a claim defensible. The
   composite's worth is genuinely mixed and now honestly bounded. No efficacy claims; no fabrication.
+
+## Cycle 13 — 2026-07-10 (M10 — FUNCTIONAL vs EXPRESSION: the project's core claim, tested)
+
+- **Motivation:** the whole thesis leans on "expression is a weak proxy for functional apoptotic
+  competence." Every prior module used *expression* predictors. `CRISPRGeneEffect.csv` (functional
+  gene dependency) was on disk but only ever used for a BAX/BAK expression-vs-CRISPR *concordance*
+  check (script 07), never against drug response. This cycle closes that gap with data already
+  downloaded — no new access needed. New: `scripts/12_functional_vs_expression.py`,
+  `outputs/logs/M10_report.md`, tables `M10_functional_vs_expression{,_paired}.csv`.
+- **Design:** DepMap heme lines → SangerModelID → GDSC2 venetoclax/navitoclax (n≈63–64 with both
+  layers). Predictor = **functional dependence (−CRISPR gene_effect)** vs **expression z-score**,
+  same polarity (sensitivity marker → negative ρ vs LN_IC50). Every ρ: perm null (5000) + bootstrap
+  CI (5000). Improvement tested with a **paired** bootstrap Δ|ρ| on the same resampled lines.
+- **Result — honest and mixed, not a clean win:**
+  - **BCL2 (venetoclax target): functional is consistently but NOT decisively stronger.** Venetoclax
+    LN_IC50 expr ρ=−0.454 → func ρ=−0.571; AUC −0.513 → −0.607; navitoclax −0.452 → −0.529. Paired
+    Δ|ρ| ≈ +0.12–0.15, P(func>expr)=0.89–0.93, but paired CI includes 0 at n≈63. First *functional*
+    corroboration of the core premise on the guardian axis — directional, not statistically decisive.
+  - **MCL1: expression BEATS functional (SIGNIF for navitoclax).** Because MCL1 is pan-essential
+    (median gene-effect −0.906, tiny variance) → no dynamic range to discriminate response. So
+    "functional > expression" is **specific to the discriminating guardian, not universal** —
+    corrected the naive expectation, reported the reversal.
+  - **Executioner (BAX/BAK): null in BOTH readouts + a mechanistic why.** |ρ|<0.11, p>0.26 in both;
+    BAX gene-effect median +0.119, BAK1 −0.316 → pro-apoptotic effectors are growth-neutral, so a
+    proliferation CRISPR screen structurally cannot read executioner competence.
+- **Net:** strengthens the acquisition argument with *evidence, not assertion*: the executioner axis
+  is now a THREE-way case (expression null + functional-CRISPR null + a structural reason CRISPR
+  can't see it) → the decisive layer must be functional BH3 profiling / engineered BAX-BAK-null
+  lines. No efficacy claim; no fabrication; every number traces to a saved table.
