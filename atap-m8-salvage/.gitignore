@@ -1,7 +1,0 @@
-data/raw/*
-!data/raw/MANIFEST.md
-data/interim/
-data/processed/
-*.pyc
-__pycache__/
-.DS_Store
