@@ -49,3 +49,24 @@ power is limited; the continuous score is the primary predictor.
 | 10 | Heme indication novelty + IP gate | (M9 log) | priorart_log.md | novelty is an output of M9, not asserted a priori |
 
 *(figure/data cells updated as each module writes its results)*
+
+---
+
+## Results (as run 2026-07-10; full detail in outputs/logs/M*_report.md)
+- **M2 backbone:** venetoclax LN_IC50 β=+0.102 [−0.052, 0.257], p=0.19; all four
+  drug×metric specs positive (pre-registered direction), none significant. Permutation
+  p=0.19. → *weak, directionally consistent*, reported as-is.
+- **M3 confounders:** confounders R² 0.01→0.45; executioner loss ΔR²≈0.0006, partial
+  p=0.73 → adds ~no incremental signal beyond guardian dependence.
+- **M4 multiverse:** 360 specs; median β=+0.10; 77% positive; **0% significant after FDR**;
+  S³=0.62.
+- **M5 stratifier:** susceptibility ↔ observed venetoclax resistance — DepMap ρ=0.34
+  (p=2e-4), Beat AML ex vivo ρ=0.23 (p=6e-6). Predicted, not measured.
+- **M7 spatial (real lymph node):** 60% venetoclax-sufficient, 16% bypass-required, 24%
+  low-signal; mean S³ stability 0.67 over 81 choices.
+- **M8 synthetic:** recovery ROC-AUC=1.0; spatial null p=0.001.
+- **M9 prior-art:** heme indication literature-open; patent scope flagged.
+
+**Bottom line (guardrail-bounded):** the contribution is the mechanistic rationale plus the
+target-population and spatial-routing maps. The cell-line association is weak and the
+specification curve says so. No ATAP efficacy is claimed.
