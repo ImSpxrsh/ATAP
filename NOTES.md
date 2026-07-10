@@ -126,3 +126,34 @@ each work cycle actually did and what the real numbers were (including nulls).
   (does executioner state add signal beyond MCL1 / BCL2:BCL-XL ratio / BCL2 gatekeeper mutations on
   this same BeatAML cohort?), then M4 specification curve over the analytic choices. Foundation
   files (config.yaml, environment.yml) still to add.
+
+## Cycle 4 — 2026-07-09 (M3 confounder decomposition — an honest NULL, Adharv's machine)
+
+- **Ran M3 on the same real BeatAML n=367.** Nested linear models predicting venetoclax ex-vivo
+  AUC: base -> +confounders (MCL1 expression, BCL2:BCL2L1/Bcl-xL ratio) -> +executioner (BAX/BAK)
+  state. (BCL2 gatekeeper mutations: **0 in the cohort**, dropped.) `scripts/05_confounders_m3.py`.
+- **Result — a real, reportable NULL (not massaged, per GUARDRAILS #4 / spec M3):**
+  confounders alone explain R²=0.225 of venetoclax-AUC variance; adding executioner state gives
+  R²=0.226 — **ΔR²=+0.001, ΔAIC=+1.6 (i.e. the model gets *worse* by AIC), permutation p=0.53,
+  partial Spearman(exec, AUC | confounders)=+0.04.** Executioner (BAX/BAK) state adds essentially
+  **nothing** beyond the known confounders for predicting venetoclax resistance in this cohort.
+  (The raw linear partial coefficient looked large but is unreliable here due to collinearity
+  between BAX/BAK and the guardian axis — the rank-based partial Spearman ≈0 and the ΔR²/ΔAIC/perm-p
+  all agree: null. I lead with those, not the misleading coefficient.)
+- **What this means — and does NOT mean (honest interpretation):** this does *not* refute the ATAP
+  mechanism, and it does not weaken the M2 result. It **refines the thesis and prevents an
+  overclaim.** M2's composite score predicts venetoclax resistance, but M3 shows that predictive
+  power is carried by the **guardian/MCL1 axis** (the dominant, well-established AML venetoclax-
+  resistance mechanism), **not** by executioner state specifically. Executioner (BAX/BAK) loss is
+  **rare** in AML — only 1 LoF mutation in 671 patients — so at the population level it cannot and
+  does not explain general venetoclax resistance. **Correct honest framing going forward:**
+  executioner loss defines a *narrow, specific, rare* ATAP-salvage subset that must be identified
+  by executioner state directly (this is exactly what M1's executioner_loss_score is for) — it is
+  NOT the explanation for common venetoclax resistance. Any claim that "executioner loss explains
+  venetoclax resistance" would be false and is now ruled out on real data.
+- **Consequence for the roadmap:** M1 (formal executioner_loss_score) becomes more important, not
+  less — the value is in cleanly *isolating* the rare executioner-loss subset, then asking whether
+  THAT subset is enriched in the venetoclax-resistant tail (a subgroup analysis), rather than
+  treating executioner state as a general predictor. Also worth testing on DepMap heme cell lines
+  where genetic BAX/BAK loss + CRISPR dependency may be better represented than in primary AML.
+- No efficacy claims made. PROGRESS.md M3 updated to done (null).
