@@ -349,3 +349,26 @@ each work cycle actually did and what the real numbers were (including nulls).
   the ATAP-relevant executioner-loss phenotype is rare and separable — making ATAP a hypothesis for
   a narrow subset, testable only at the bench, not a validated population map.* No fabrication; the
   one candidate novelty is conceptual and human-verification-gated.
+
+## Cycle 12 — 2026-07-09 (M4 specification curve — robustness of every conclusion)
+
+- **Built the spec-curve** (`scripts/11_spec_curve.py` → `figures/spec_curve.png`,
+  `outputs/tables/spec_curve.csv`): **25 specifications** = predictor (BCL2 / BCL2-MCL1 / composite /
+  executioner / monocytic) × cohort (BeatAML-venetoclax / GDSC-venetoclax / GDSC-navitoclax) ×
+  metric (AUC / LN_IC50) × covariate (raw / monocytic-controlled where available), each a Spearman
+  rho with a bootstrap CI. The signature rigor figure (F6).
+- **Conclusion stability (the point of the figure):**
+  - **C1 — guardian axis (BCL2 / BCL2-MCL1) negative & significant: 100%** of 12 guardian specs.
+    Rock-solid across every cohort, drug, metric, and even after monocytic control.
+  - **C2 — executioner_loss_score null (CI includes 0): 100%** of 6 executioner specs. The
+    ATAP-variable null is completely robust to analytic choice.
+  - **C3 — composite beats BCL2 alone: 40%** of 5 cohort/metrics (I predicted ~0% — the data is
+    more nuanced, reporting the real number). Honest read: the composite is clearly worse than BCL2
+    in the *patient* cohort (BeatAML −0.27 vs −0.57) but competitive in the *cell-line* cohorts
+    (GDSC). So "the composite adds nothing" is TOO STRONG; the correct statement is "the composite
+    does not *consistently* beat BCL2 alone and is clearly worse in patients — its value is
+    cohort-dependent and fragile, not zero." Corrected my own earlier overstatement.
+- **Net:** the two conclusions that matter — the guardian-axis signal is real/robust, and the
+  executioner/ATAP axis is a robust null for general resistance — are each 100% stable across the
+  multiverse. That is exactly the kind of robustness evidence that makes a claim defensible. The
+  composite's worth is genuinely mixed and now honestly bounded. No efficacy claims; no fabrication.
