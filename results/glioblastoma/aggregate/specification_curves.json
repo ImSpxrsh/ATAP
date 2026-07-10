@@ -1,0 +1,1234 @@
+{
+  "metadata": [
+    {
+      "spec": {
+        "name": "canonical_seurat",
+        "normalization": "log1p",
+        "feature_selection": {
+          "method": "seurat",
+          "n_genes": 3000
+        },
+        "dimensionality_reduction": {
+          "n_components": 30
+        },
+        "neighborhood_graph": {
+          "type": "knn",
+          "k_or_radius": 15
+        },
+        "clustering": {
+          "method": "leiden",
+          "resolution": 0.5
+        },
+        "spatially_variable_genes": {
+          "method": "morans_i"
+        },
+        "cell_cell_communication": {
+          "enabled": false
+        }
+      },
+      "random_state": 42,
+      "runtime_seconds": 135.78076314926147,
+      "normalization_used": "log1p",
+      "n_hvgs": 3000,
+      "n_pca_components": 30,
+      "graph_type": "knn",
+      "graph_param": 15,
+      "clustering_method": "leiden",
+      "clustering_resolution": 0.5,
+      "n_clusters_found": 9,
+      "svg_method": "morans_i",
+      "n_svg_genes_tested": 3000,
+      "spec_name": "canonical_seurat",
+      "spec_hash": "20beec4d"
+    },
+    {
+      "spec": {
+        "name": "conservative_2k_hvgs",
+        "normalization": "log1p",
+        "feature_selection": {
+          "method": "seurat",
+          "n_genes": 2000
+        },
+        "dimensionality_reduction": {
+          "n_components": 30
+        },
+        "neighborhood_graph": {
+          "type": "knn",
+          "k_or_radius": 15
+        },
+        "clustering": {
+          "method": "leiden",
+          "resolution": 0.5
+        },
+        "spatially_variable_genes": {
+          "method": "morans_i"
+        },
+        "cell_cell_communication": {
+          "enabled": false
+        }
+      },
+      "random_state": 42,
+      "runtime_seconds": 91.62360692024231,
+      "normalization_used": "log1p",
+      "n_hvgs": 2000,
+      "n_pca_components": 30,
+      "graph_type": "knn",
+      "graph_param": 15,
+      "clustering_method": "leiden",
+      "clustering_resolution": 0.5,
+      "n_clusters_found": 9,
+      "svg_method": "morans_i",
+      "n_svg_genes_tested": 2000,
+      "spec_name": "conservative_2k_hvgs",
+      "spec_hash": "dbfd74b8"
+    },
+    {
+      "spec": {
+        "name": "aggressive_5k_hvgs",
+        "normalization": "log1p",
+        "feature_selection": {
+          "method": "seurat",
+          "n_genes": 5000
+        },
+        "dimensionality_reduction": {
+          "n_components": 30
+        },
+        "neighborhood_graph": {
+          "type": "knn",
+          "k_or_radius": 15
+        },
+        "clustering": {
+          "method": "leiden",
+          "resolution": 0.5
+        },
+        "spatially_variable_genes": {
+          "method": "morans_i"
+        },
+        "cell_cell_communication": {
+          "enabled": false
+        }
+      },
+      "random_state": 42,
+      "runtime_seconds": 225.00181007385254,
+      "normalization_used": "log1p",
+      "n_hvgs": 5000,
+      "n_pca_components": 30,
+      "graph_type": "knn",
+      "graph_param": 15,
+      "clustering_method": "leiden",
+      "clustering_resolution": 0.5,
+      "n_clusters_found": 12,
+      "svg_method": "morans_i",
+      "n_svg_genes_tested": 5000,
+      "spec_name": "aggressive_5k_hvgs",
+      "spec_hash": "50813a56"
+    },
+    {
+      "spec": {
+        "name": "hvg_cellranger",
+        "normalization": "log1p",
+        "feature_selection": {
+          "method": "scanpy",
+          "n_genes": 3000
+        },
+        "dimensionality_reduction": {
+          "n_components": 30
+        },
+        "neighborhood_graph": {
+          "type": "knn",
+          "k_or_radius": 15
+        },
+        "clustering": {
+          "method": "leiden",
+          "resolution": 0.5
+        },
+        "spatially_variable_genes": {
+          "method": "morans_i"
+        },
+        "cell_cell_communication": {
+          "enabled": false
+        }
+      },
+      "random_state": 42,
+      "runtime_seconds": 133.14374589920044,
+      "normalization_used": "log1p",
+      "n_hvgs": 3000,
+      "n_pca_components": 30,
+      "graph_type": "knn",
+      "graph_param": 15,
+      "clustering_method": "leiden",
+      "clustering_resolution": 0.5,
+      "n_clusters_found": 10,
+      "svg_method": "morans_i",
+      "n_svg_genes_tested": 3000,
+      "spec_name": "hvg_cellranger",
+      "spec_hash": "d0955b63"
+    },
+    {
+      "spec": {
+        "name": "norm_sqrt",
+        "normalization": "sqrt",
+        "feature_selection": {
+          "method": "seurat",
+          "n_genes": 3000
+        },
+        "dimensionality_reduction": {
+          "n_components": 30
+        },
+        "neighborhood_graph": {
+          "type": "knn",
+          "k_or_radius": 15
+        },
+        "clustering": {
+          "method": "leiden",
+          "resolution": 0.5
+        },
+        "spatially_variable_genes": {
+          "method": "morans_i"
+        },
+        "cell_cell_communication": {
+          "enabled": false
+        }
+      },
+      "random_state": 42,
+      "runtime_seconds": 135.51206302642822,
+      "normalization_used": "sqrt",
+      "n_hvgs": 3000,
+      "n_pca_components": 30,
+      "graph_type": "knn",
+      "graph_param": 15,
+      "clustering_method": "leiden",
+      "clustering_resolution": 0.5,
+      "n_clusters_found": 11,
+      "svg_method": "morans_i",
+      "n_svg_genes_tested": 3000,
+      "spec_name": "norm_sqrt",
+      "spec_hash": "d5bb2464"
+    },
+    {
+      "spec": {
+        "name": "norm_total",
+        "normalization": "total",
+        "feature_selection": {
+          "method": "seurat",
+          "n_genes": 3000
+        },
+        "dimensionality_reduction": {
+          "n_components": 30
+        },
+        "neighborhood_graph": {
+          "type": "knn",
+          "k_or_radius": 15
+        },
+        "clustering": {
+          "method": "leiden",
+          "resolution": 0.5
+        },
+        "spatially_variable_genes": {
+          "method": "morans_i"
+        },
+        "cell_cell_communication": {
+          "enabled": false
+        }
+      },
+      "random_state": 42,
+      "runtime_seconds": 124.45435118675232,
+      "normalization_used": "total",
+      "n_hvgs": 3000,
+      "n_pca_components": 30,
+      "graph_type": "knn",
+      "graph_param": 15,
+      "clustering_method": "leiden",
+      "clustering_resolution": 0.5,
+      "n_clusters_found": 7,
+      "svg_method": "morans_i",
+      "n_svg_genes_tested": 3000,
+      "spec_name": "norm_total",
+      "spec_hash": "0f689eda"
+    },
+    {
+      "spec": {
+        "name": "pca_50",
+        "normalization": "log1p",
+        "feature_selection": {
+          "method": "seurat",
+          "n_genes": 3000
+        },
+        "dimensionality_reduction": {
+          "n_components": 50
+        },
+        "neighborhood_graph": {
+          "type": "knn",
+          "k_or_radius": 15
+        },
+        "clustering": {
+          "method": "leiden",
+          "resolution": 0.5
+        },
+        "spatially_variable_genes": {
+          "method": "morans_i"
+        },
+        "cell_cell_communication": {
+          "enabled": false
+        }
+      },
+      "random_state": 42,
+      "runtime_seconds": 131.39572715759277,
+      "normalization_used": "log1p",
+      "n_hvgs": 3000,
+      "n_pca_components": 50,
+      "graph_type": "knn",
+      "graph_param": 15,
+      "clustering_method": "leiden",
+      "clustering_resolution": 0.5,
+      "n_clusters_found": 10,
+      "svg_method": "morans_i",
+      "n_svg_genes_tested": 3000,
+      "spec_name": "pca_50",
+      "spec_hash": "413d6e07"
+    },
+    {
+      "spec": {
+        "name": "small_k6",
+        "normalization": "log1p",
+        "feature_selection": {
+          "method": "seurat",
+          "n_genes": 3000
+        },
+        "dimensionality_reduction": {
+          "n_components": 30
+        },
+        "neighborhood_graph": {
+          "type": "knn",
+          "k_or_radius": 6
+        },
+        "clustering": {
+          "method": "leiden",
+          "resolution": 0.5
+        },
+        "spatially_variable_genes": {
+          "method": "morans_i"
+        },
+        "cell_cell_communication": {
+          "enabled": false
+        }
+      },
+      "random_state": 42,
+      "runtime_seconds": 136.13954901695251,
+      "normalization_used": "log1p",
+      "n_hvgs": 3000,
+      "n_pca_components": 30,
+      "graph_type": "knn",
+      "graph_param": 6,
+      "clustering_method": "leiden",
+      "clustering_resolution": 0.5,
+      "n_clusters_found": 12,
+      "svg_method": "morans_i",
+      "n_svg_genes_tested": 3000,
+      "spec_name": "small_k6",
+      "spec_hash": "c868d3ff"
+    },
+    {
+      "spec": {
+        "name": "medium_k10",
+        "normalization": "log1p",
+        "feature_selection": {
+          "method": "seurat",
+          "n_genes": 3000
+        },
+        "dimensionality_reduction": {
+          "n_components": 30
+        },
+        "neighborhood_graph": {
+          "type": "knn",
+          "k_or_radius": 10
+        },
+        "clustering": {
+          "method": "leiden",
+          "resolution": 0.5
+        },
+        "spatially_variable_genes": {
+          "method": "morans_i"
+        },
+        "cell_cell_communication": {
+          "enabled": false
+        }
+      },
+      "random_state": 42,
+      "runtime_seconds": 141.66369771957397,
+      "normalization_used": "log1p",
+      "n_hvgs": 3000,
+      "n_pca_components": 30,
+      "graph_type": "knn",
+      "graph_param": 10,
+      "clustering_method": "leiden",
+      "clustering_resolution": 0.5,
+      "n_clusters_found": 11,
+      "svg_method": "morans_i",
+      "n_svg_genes_tested": 3000,
+      "spec_name": "medium_k10",
+      "spec_hash": "2e3f9edc"
+    },
+    {
+      "spec": {
+        "name": "coarse_res03",
+        "normalization": "log1p",
+        "feature_selection": {
+          "method": "seurat",
+          "n_genes": 3000
+        },
+        "dimensionality_reduction": {
+          "n_components": 30
+        },
+        "neighborhood_graph": {
+          "type": "knn",
+          "k_or_radius": 15
+        },
+        "clustering": {
+          "method": "leiden",
+          "resolution": 0.3
+        },
+        "spatially_variable_genes": {
+          "method": "morans_i"
+        },
+        "cell_cell_communication": {
+          "enabled": false
+        }
+      },
+      "random_state": 42,
+      "runtime_seconds": 135.42577290534973,
+      "normalization_used": "log1p",
+      "n_hvgs": 3000,
+      "n_pca_components": 30,
+      "graph_type": "knn",
+      "graph_param": 15,
+      "clustering_method": "leiden",
+      "clustering_resolution": 0.3,
+      "n_clusters_found": 7,
+      "svg_method": "morans_i",
+      "n_svg_genes_tested": 3000,
+      "spec_name": "coarse_res03",
+      "spec_hash": "2cc49477"
+    },
+    {
+      "spec": {
+        "name": "fine_res08",
+        "normalization": "log1p",
+        "feature_selection": {
+          "method": "seurat",
+          "n_genes": 3000
+        },
+        "dimensionality_reduction": {
+          "n_components": 30
+        },
+        "neighborhood_graph": {
+          "type": "knn",
+          "k_or_radius": 15
+        },
+        "clustering": {
+          "method": "leiden",
+          "resolution": 0.8
+        },
+        "spatially_variable_genes": {
+          "method": "morans_i"
+        },
+        "cell_cell_communication": {
+          "enabled": false
+        }
+      },
+      "random_state": 42,
+      "runtime_seconds": 131.67313408851624,
+      "normalization_used": "log1p",
+      "n_hvgs": 3000,
+      "n_pca_components": 30,
+      "graph_type": "knn",
+      "graph_param": 15,
+      "clustering_method": "leiden",
+      "clustering_resolution": 0.8,
+      "n_clusters_found": 16,
+      "svg_method": "morans_i",
+      "n_svg_genes_tested": 3000,
+      "spec_name": "fine_res08",
+      "spec_hash": "28401edf"
+    },
+    {
+      "spec": {
+        "name": "veryfine_res12",
+        "normalization": "log1p",
+        "feature_selection": {
+          "method": "seurat",
+          "n_genes": 3000
+        },
+        "dimensionality_reduction": {
+          "n_components": 30
+        },
+        "neighborhood_graph": {
+          "type": "knn",
+          "k_or_radius": 15
+        },
+        "clustering": {
+          "method": "leiden",
+          "resolution": 1.2
+        },
+        "spatially_variable_genes": {
+          "method": "morans_i"
+        },
+        "cell_cell_communication": {
+          "enabled": false
+        }
+      },
+      "random_state": 42,
+      "runtime_seconds": 125.74981093406677,
+      "normalization_used": "log1p",
+      "n_hvgs": 3000,
+      "n_pca_components": 30,
+      "graph_type": "knn",
+      "graph_param": 15,
+      "clustering_method": "leiden",
+      "clustering_resolution": 1.2,
+      "n_clusters_found": 20,
+      "svg_method": "morans_i",
+      "n_svg_genes_tested": 3000,
+      "spec_name": "veryfine_res12",
+      "spec_hash": "fb369d66"
+    },
+    {
+      "spec": {
+        "name": "louvain_res05",
+        "normalization": "log1p",
+        "feature_selection": {
+          "method": "seurat",
+          "n_genes": 3000
+        },
+        "dimensionality_reduction": {
+          "n_components": 30
+        },
+        "neighborhood_graph": {
+          "type": "knn",
+          "k_or_radius": 15
+        },
+        "clustering": {
+          "method": "louvain",
+          "resolution": 0.5
+        },
+        "spatially_variable_genes": {
+          "method": "morans_i"
+        },
+        "cell_cell_communication": {
+          "enabled": false
+        }
+      },
+      "random_state": 42,
+      "runtime_seconds": 128.8242301940918,
+      "normalization_used": "log1p",
+      "n_hvgs": 3000,
+      "n_pca_components": 30,
+      "graph_type": "knn",
+      "graph_param": 15,
+      "clustering_method": "louvain",
+      "clustering_resolution": 0.5,
+      "n_clusters_found": 9,
+      "svg_method": "morans_i",
+      "n_svg_genes_tested": 3000,
+      "spec_name": "louvain_res05",
+      "spec_hash": "865655d2"
+    },
+    {
+      "spec": {
+        "name": "louvain_res08",
+        "normalization": "log1p",
+        "feature_selection": {
+          "method": "seurat",
+          "n_genes": 3000
+        },
+        "dimensionality_reduction": {
+          "n_components": 30
+        },
+        "neighborhood_graph": {
+          "type": "knn",
+          "k_or_radius": 15
+        },
+        "clustering": {
+          "method": "louvain",
+          "resolution": 0.8
+        },
+        "spatially_variable_genes": {
+          "method": "morans_i"
+        },
+        "cell_cell_communication": {
+          "enabled": false
+        }
+      },
+      "random_state": 42,
+      "runtime_seconds": 127.62961316108704,
+      "normalization_used": "log1p",
+      "n_hvgs": 3000,
+      "n_pca_components": 30,
+      "graph_type": "knn",
+      "graph_param": 15,
+      "clustering_method": "louvain",
+      "clustering_resolution": 0.8,
+      "n_clusters_found": 16,
+      "svg_method": "morans_i",
+      "n_svg_genes_tested": 3000,
+      "spec_name": "louvain_res08",
+      "spec_hash": "157982b4"
+    },
+    {
+      "spec": {
+        "name": "extreme_sqrt_2k_fine",
+        "normalization": "sqrt",
+        "feature_selection": {
+          "method": "seurat",
+          "n_genes": 2000
+        },
+        "dimensionality_reduction": {
+          "n_components": 50
+        },
+        "neighborhood_graph": {
+          "type": "knn",
+          "k_or_radius": 6
+        },
+        "clustering": {
+          "method": "louvain",
+          "resolution": 1.2
+        },
+        "spatially_variable_genes": {
+          "method": "morans_i"
+        },
+        "cell_cell_communication": {
+          "enabled": false
+        }
+      },
+      "random_state": 42,
+      "runtime_seconds": 85.98681902885437,
+      "normalization_used": "sqrt",
+      "n_hvgs": 2000,
+      "n_pca_components": 50,
+      "graph_type": "knn",
+      "graph_param": 6,
+      "clustering_method": "louvain",
+      "clustering_resolution": 1.2,
+      "n_clusters_found": 27,
+      "svg_method": "morans_i",
+      "n_svg_genes_tested": 2000,
+      "spec_name": "extreme_sqrt_2k_fine",
+      "spec_hash": "132fa514"
+    },
+    {
+      "spec": {
+        "name": "extreme_total_5k_coarse",
+        "normalization": "total",
+        "feature_selection": {
+          "method": "scanpy",
+          "n_genes": 5000
+        },
+        "dimensionality_reduction": {
+          "n_components": 30
+        },
+        "neighborhood_graph": {
+          "type": "knn",
+          "k_or_radius": 15
+        },
+        "clustering": {
+          "method": "leiden",
+          "resolution": 0.3
+        },
+        "spatially_variable_genes": {
+          "method": "morans_i"
+        },
+        "cell_cell_communication": {
+          "enabled": false
+        }
+      },
+      "random_state": 42,
+      "runtime_seconds": 203.5827600955963,
+      "normalization_used": "total",
+      "n_hvgs": 5000,
+      "n_pca_components": 30,
+      "graph_type": "knn",
+      "graph_param": 15,
+      "clustering_method": "leiden",
+      "clustering_resolution": 0.3,
+      "n_clusters_found": 7,
+      "svg_method": "morans_i",
+      "n_svg_genes_tested": 5000,
+      "spec_name": "extreme_total_5k_coarse",
+      "spec_hash": "ed76a202"
+    },
+    {
+      "spec": {
+        "name": "pca50_fine",
+        "normalization": "log1p",
+        "feature_selection": {
+          "method": "seurat",
+          "n_genes": 3000
+        },
+        "dimensionality_reduction": {
+          "n_components": 50
+        },
+        "neighborhood_graph": {
+          "type": "knn",
+          "k_or_radius": 15
+        },
+        "clustering": {
+          "method": "leiden",
+          "resolution": 0.8
+        },
+        "spatially_variable_genes": {
+          "method": "morans_i"
+        },
+        "cell_cell_communication": {
+          "enabled": false
+        }
+      },
+      "random_state": 42,
+      "runtime_seconds": 140.0273630619049,
+      "normalization_used": "log1p",
+      "n_hvgs": 3000,
+      "n_pca_components": 50,
+      "graph_type": "knn",
+      "graph_param": 15,
+      "clustering_method": "leiden",
+      "clustering_resolution": 0.8,
+      "n_clusters_found": 11,
+      "svg_method": "morans_i",
+      "n_svg_genes_tested": 3000,
+      "spec_name": "pca50_fine",
+      "spec_hash": "de3a5ace"
+    },
+    {
+      "spec": {
+        "name": "pca50_louvain",
+        "normalization": "log1p",
+        "feature_selection": {
+          "method": "seurat",
+          "n_genes": 3000
+        },
+        "dimensionality_reduction": {
+          "n_components": 50
+        },
+        "neighborhood_graph": {
+          "type": "knn",
+          "k_or_radius": 15
+        },
+        "clustering": {
+          "method": "louvain",
+          "resolution": 0.5
+        },
+        "spatially_variable_genes": {
+          "method": "morans_i"
+        },
+        "cell_cell_communication": {
+          "enabled": false
+        }
+      },
+      "random_state": 42,
+      "runtime_seconds": 138.31404185295105,
+      "normalization_used": "log1p",
+      "n_hvgs": 3000,
+      "n_pca_components": 50,
+      "graph_type": "knn",
+      "graph_param": 15,
+      "clustering_method": "louvain",
+      "clustering_resolution": 0.5,
+      "n_clusters_found": 11,
+      "svg_method": "morans_i",
+      "n_svg_genes_tested": 3000,
+      "spec_name": "pca50_louvain",
+      "spec_hash": "c8b286f4"
+    },
+    {
+      "spec": {
+        "name": "louvain_coarse_res03",
+        "normalization": "log1p",
+        "feature_selection": {
+          "method": "seurat",
+          "n_genes": 3000
+        },
+        "dimensionality_reduction": {
+          "n_components": 30
+        },
+        "neighborhood_graph": {
+          "type": "knn",
+          "k_or_radius": 15
+        },
+        "clustering": {
+          "method": "louvain",
+          "resolution": 0.3
+        },
+        "spatially_variable_genes": {
+          "method": "morans_i"
+        },
+        "cell_cell_communication": {
+          "enabled": false
+        }
+      },
+      "random_state": 42,
+      "runtime_seconds": 131.68530321121216,
+      "normalization_used": "log1p",
+      "n_hvgs": 3000,
+      "n_pca_components": 30,
+      "graph_type": "knn",
+      "graph_param": 15,
+      "clustering_method": "louvain",
+      "clustering_resolution": 0.3,
+      "n_clusters_found": 9,
+      "svg_method": "morans_i",
+      "n_svg_genes_tested": 3000,
+      "spec_name": "louvain_coarse_res03",
+      "spec_hash": "a8a1485d"
+    },
+    {
+      "spec": {
+        "name": "louvain_fine_res12",
+        "normalization": "log1p",
+        "feature_selection": {
+          "method": "seurat",
+          "n_genes": 3000
+        },
+        "dimensionality_reduction": {
+          "n_components": 30
+        },
+        "neighborhood_graph": {
+          "type": "knn",
+          "k_or_radius": 15
+        },
+        "clustering": {
+          "method": "louvain",
+          "resolution": 1.2
+        },
+        "spatially_variable_genes": {
+          "method": "morans_i"
+        },
+        "cell_cell_communication": {
+          "enabled": false
+        }
+      },
+      "random_state": 42,
+      "runtime_seconds": 122.8991630077362,
+      "normalization_used": "log1p",
+      "n_hvgs": 3000,
+      "n_pca_components": 30,
+      "graph_type": "knn",
+      "graph_param": 15,
+      "clustering_method": "louvain",
+      "clustering_resolution": 1.2,
+      "n_clusters_found": 18,
+      "svg_method": "morans_i",
+      "n_svg_genes_tested": 3000,
+      "spec_name": "louvain_fine_res12",
+      "spec_hash": "488d0e3c"
+    },
+    {
+      "spec": {
+        "name": "small_k6_fine",
+        "normalization": "log1p",
+        "feature_selection": {
+          "method": "seurat",
+          "n_genes": 3000
+        },
+        "dimensionality_reduction": {
+          "n_components": 30
+        },
+        "neighborhood_graph": {
+          "type": "knn",
+          "k_or_radius": 6
+        },
+        "clustering": {
+          "method": "leiden",
+          "resolution": 0.8
+        },
+        "spatially_variable_genes": {
+          "method": "morans_i"
+        },
+        "cell_cell_communication": {
+          "enabled": false
+        }
+      },
+      "random_state": 42,
+      "runtime_seconds": 121.72614121437073,
+      "normalization_used": "log1p",
+      "n_hvgs": 3000,
+      "n_pca_components": 30,
+      "graph_type": "knn",
+      "graph_param": 6,
+      "clustering_method": "leiden",
+      "clustering_resolution": 0.8,
+      "n_clusters_found": 21,
+      "svg_method": "morans_i",
+      "n_svg_genes_tested": 3000,
+      "spec_name": "small_k6_fine",
+      "spec_hash": "ac69cb39"
+    },
+    {
+      "spec": {
+        "name": "sqrt_smallk_coarse",
+        "normalization": "sqrt",
+        "feature_selection": {
+          "method": "seurat",
+          "n_genes": 3000
+        },
+        "dimensionality_reduction": {
+          "n_components": 30
+        },
+        "neighborhood_graph": {
+          "type": "knn",
+          "k_or_radius": 6
+        },
+        "clustering": {
+          "method": "leiden",
+          "resolution": 0.3
+        },
+        "spatially_variable_genes": {
+          "method": "morans_i"
+        },
+        "cell_cell_communication": {
+          "enabled": false
+        }
+      },
+      "random_state": 42,
+      "runtime_seconds": 119.06331372261047,
+      "normalization_used": "sqrt",
+      "n_hvgs": 3000,
+      "n_pca_components": 30,
+      "graph_type": "knn",
+      "graph_param": 6,
+      "clustering_method": "leiden",
+      "clustering_resolution": 0.3,
+      "n_clusters_found": 10,
+      "svg_method": "morans_i",
+      "n_svg_genes_tested": 3000,
+      "spec_name": "sqrt_smallk_coarse",
+      "spec_hash": "9af853eb"
+    },
+    {
+      "spec": {
+        "name": "sqrt_5k_medium",
+        "normalization": "sqrt",
+        "feature_selection": {
+          "method": "seurat",
+          "n_genes": 5000
+        },
+        "dimensionality_reduction": {
+          "n_components": 30
+        },
+        "neighborhood_graph": {
+          "type": "knn",
+          "k_or_radius": 10
+        },
+        "clustering": {
+          "method": "leiden",
+          "resolution": 0.5
+        },
+        "spatially_variable_genes": {
+          "method": "morans_i"
+        },
+        "cell_cell_communication": {
+          "enabled": false
+        }
+      },
+      "random_state": 42,
+      "runtime_seconds": 200.46114206314087,
+      "normalization_used": "sqrt",
+      "n_hvgs": 5000,
+      "n_pca_components": 30,
+      "graph_type": "knn",
+      "graph_param": 10,
+      "clustering_method": "leiden",
+      "clustering_resolution": 0.5,
+      "n_clusters_found": 13,
+      "svg_method": "morans_i",
+      "n_svg_genes_tested": 5000,
+      "spec_name": "sqrt_5k_medium",
+      "spec_hash": "6904c73e"
+    },
+    {
+      "spec": {
+        "name": "total_2k_fine",
+        "normalization": "total",
+        "feature_selection": {
+          "method": "seurat",
+          "n_genes": 2000
+        },
+        "dimensionality_reduction": {
+          "n_components": 30
+        },
+        "neighborhood_graph": {
+          "type": "knn",
+          "k_or_radius": 15
+        },
+        "clustering": {
+          "method": "leiden",
+          "resolution": 0.8
+        },
+        "spatially_variable_genes": {
+          "method": "morans_i"
+        },
+        "cell_cell_communication": {
+          "enabled": false
+        }
+      },
+      "random_state": 42,
+      "runtime_seconds": 88.28702640533447,
+      "normalization_used": "total",
+      "n_hvgs": 2000,
+      "n_pca_components": 30,
+      "graph_type": "knn",
+      "graph_param": 15,
+      "clustering_method": "leiden",
+      "clustering_resolution": 0.8,
+      "n_clusters_found": 8,
+      "svg_method": "morans_i",
+      "n_svg_genes_tested": 2000,
+      "spec_name": "total_2k_fine",
+      "spec_hash": "d10cc090"
+    },
+    {
+      "spec": {
+        "name": "cellranger_2k_coarse",
+        "normalization": "log1p",
+        "feature_selection": {
+          "method": "scanpy",
+          "n_genes": 2000
+        },
+        "dimensionality_reduction": {
+          "n_components": 30
+        },
+        "neighborhood_graph": {
+          "type": "knn",
+          "k_or_radius": 15
+        },
+        "clustering": {
+          "method": "leiden",
+          "resolution": 0.3
+        },
+        "spatially_variable_genes": {
+          "method": "morans_i"
+        },
+        "cell_cell_communication": {
+          "enabled": false
+        }
+      },
+      "random_state": 42,
+      "runtime_seconds": 90.02885007858276,
+      "normalization_used": "log1p",
+      "n_hvgs": 2000,
+      "n_pca_components": 30,
+      "graph_type": "knn",
+      "graph_param": 15,
+      "clustering_method": "leiden",
+      "clustering_resolution": 0.3,
+      "n_clusters_found": 8,
+      "svg_method": "morans_i",
+      "n_svg_genes_tested": 2000,
+      "spec_name": "cellranger_2k_coarse",
+      "spec_hash": "f92ec48e"
+    },
+    {
+      "spec": {
+        "name": "cellranger_5k_fine",
+        "normalization": "log1p",
+        "feature_selection": {
+          "method": "scanpy",
+          "n_genes": 5000
+        },
+        "dimensionality_reduction": {
+          "n_components": 50
+        },
+        "neighborhood_graph": {
+          "type": "knn",
+          "k_or_radius": 10
+        },
+        "clustering": {
+          "method": "leiden",
+          "resolution": 0.8
+        },
+        "spatially_variable_genes": {
+          "method": "morans_i"
+        },
+        "cell_cell_communication": {
+          "enabled": false
+        }
+      },
+      "random_state": 42,
+      "runtime_seconds": 216.6226189136505,
+      "normalization_used": "log1p",
+      "n_hvgs": 5000,
+      "n_pca_components": 50,
+      "graph_type": "knn",
+      "graph_param": 10,
+      "clustering_method": "leiden",
+      "clustering_resolution": 0.8,
+      "n_clusters_found": 16,
+      "svg_method": "morans_i",
+      "n_svg_genes_tested": 5000,
+      "spec_name": "cellranger_5k_fine",
+      "spec_hash": "92b85d95"
+    },
+    {
+      "spec": {
+        "name": "pca50_k6",
+        "normalization": "log1p",
+        "feature_selection": {
+          "method": "seurat",
+          "n_genes": 3000
+        },
+        "dimensionality_reduction": {
+          "n_components": 50
+        },
+        "neighborhood_graph": {
+          "type": "knn",
+          "k_or_radius": 6
+        },
+        "clustering": {
+          "method": "leiden",
+          "resolution": 0.5
+        },
+        "spatially_variable_genes": {
+          "method": "morans_i"
+        },
+        "cell_cell_communication": {
+          "enabled": false
+        }
+      },
+      "random_state": 42,
+      "runtime_seconds": 126.19954705238342,
+      "normalization_used": "log1p",
+      "n_hvgs": 3000,
+      "n_pca_components": 50,
+      "graph_type": "knn",
+      "graph_param": 6,
+      "clustering_method": "leiden",
+      "clustering_resolution": 0.5,
+      "n_clusters_found": 11,
+      "svg_method": "morans_i",
+      "n_svg_genes_tested": 3000,
+      "spec_name": "pca50_k6",
+      "spec_hash": "5abb376a"
+    },
+    {
+      "spec": {
+        "name": "sqrt_louvain_res08",
+        "normalization": "sqrt",
+        "feature_selection": {
+          "method": "seurat",
+          "n_genes": 3000
+        },
+        "dimensionality_reduction": {
+          "n_components": 30
+        },
+        "neighborhood_graph": {
+          "type": "knn",
+          "k_or_radius": 15
+        },
+        "clustering": {
+          "method": "louvain",
+          "resolution": 0.8
+        },
+        "spatially_variable_genes": {
+          "method": "morans_i"
+        },
+        "cell_cell_communication": {
+          "enabled": false
+        }
+      },
+      "random_state": 42,
+      "runtime_seconds": 124.23651099205017,
+      "normalization_used": "sqrt",
+      "n_hvgs": 3000,
+      "n_pca_components": 30,
+      "graph_type": "knn",
+      "graph_param": 15,
+      "clustering_method": "louvain",
+      "clustering_resolution": 0.8,
+      "n_clusters_found": 15,
+      "svg_method": "morans_i",
+      "n_svg_genes_tested": 3000,
+      "spec_name": "sqrt_louvain_res08",
+      "spec_hash": "ab377306"
+    },
+    {
+      "spec": {
+        "name": "k10_veryfine_res12",
+        "normalization": "log1p",
+        "feature_selection": {
+          "method": "seurat",
+          "n_genes": 3000
+        },
+        "dimensionality_reduction": {
+          "n_components": 30
+        },
+        "neighborhood_graph": {
+          "type": "knn",
+          "k_or_radius": 10
+        },
+        "clustering": {
+          "method": "leiden",
+          "resolution": 1.2
+        },
+        "spatially_variable_genes": {
+          "method": "morans_i"
+        },
+        "cell_cell_communication": {
+          "enabled": false
+        }
+      },
+      "random_state": 42,
+      "runtime_seconds": 122.75414109230042,
+      "normalization_used": "log1p",
+      "n_hvgs": 3000,
+      "n_pca_components": 30,
+      "graph_type": "knn",
+      "graph_param": 10,
+      "clustering_method": "leiden",
+      "clustering_resolution": 1.2,
+      "n_clusters_found": 20,
+      "svg_method": "morans_i",
+      "n_svg_genes_tested": 3000,
+      "spec_name": "k10_veryfine_res12",
+      "spec_hash": "31634f8a"
+    },
+    {
+      "spec": {
+        "name": "aggressive_5k_louvain",
+        "normalization": "log1p",
+        "feature_selection": {
+          "method": "seurat",
+          "n_genes": 5000
+        },
+        "dimensionality_reduction": {
+          "n_components": 30
+        },
+        "neighborhood_graph": {
+          "type": "knn",
+          "k_or_radius": 15
+        },
+        "clustering": {
+          "method": "louvain",
+          "resolution": 0.5
+        },
+        "spatially_variable_genes": {
+          "method": "morans_i"
+        },
+        "cell_cell_communication": {
+          "enabled": false
+        }
+      },
+      "random_state": 42,
+      "runtime_seconds": 201.27790188789368,
+      "normalization_used": "log1p",
+      "n_hvgs": 5000,
+      "n_pca_components": 30,
+      "graph_type": "knn",
+      "graph_param": 15,
+      "clustering_method": "louvain",
+      "clustering_resolution": 0.5,
+      "n_clusters_found": 11,
+      "svg_method": "morans_i",
+      "n_svg_genes_tested": 5000,
+      "spec_name": "aggressive_5k_louvain",
+      "spec_hash": "20b301f3"
+    }
+  ]
+}
