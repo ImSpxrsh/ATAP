@@ -268,3 +268,23 @@ each work cycle actually did and what the real numbers were (including nulls).
   include these baselines + the monocytic control as first-class comparators.
 - Recorded prominently because it undermines part of the model design — surfacing, not burying, is
   the guardrail. No efficacy claims; ex-vivo resistance only.
+
+## Cycle 9 — 2026-07-09 (honest model-comparison figure; F4/F5)
+
+- **Built the transparent "what actually predicts venetoclax resistance?" figure**
+  (`scripts/09_model_comparison.py` → `figures/model_comparison.png`) — a forest plot of every
+  candidate predictor vs real BeatAML venetoclax ex-vivo AUC (n=367), each with a 95% bootstrap CI,
+  sorted. This is the honest F4/F5 the cycle-8 discrimination result demands.
+- **Ranking (Spearman rho, negative = predicts sensitivity):** BCL2+monocytic baseline **+0.74**;
+  monocytic signature **+0.72**; BCL2 alone **−0.57**; BCL2−MCL1 guardian **−0.51**; MCL1 alone
+  **+0.26**; composite venetoclax_score **−0.27**; **executioner_loss_score +0.02** (CI
+  [−0.08,+0.12], i.e. essentially zero).
+- **The honest core, now in one figure:** (1) the strongest predictors are differentiation state
+  (monocytic) and BCL2 — not the composite; (2) the composite is middling and beaten by its own
+  components; (3) **the executioner_loss_score — the single variable the ATAP thesis depends on —
+  does not predict general venetoclax resistance at all** (rho +0.02). This is exactly consistent
+  with M3/M1: executioner loss is a rare, specific phenotype, NOT a driver of common resistance,
+  and the ATAP rationale must rest on that rare subset (or the acquired-resistance setting), never
+  on general-resistance prediction.
+- This figure is the kind of rigorous, defensible centerpiece that strengthens the project by being
+  honest about what the model does and doesn't do. No efficacy claims.
