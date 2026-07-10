@@ -1,0 +1,28 @@
+# environment.yml — pinned dependencies (GUARDRAILS §6).
+# Actual versions resolved in THIS run are recorded in outputs/logs/environment_lock.txt
+# (written by src/data/fetch_data.py at first run). This file is the reproducible spec.
+name: atap-m8-salvage
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.14
+  - pandas
+  - numpy
+  - scipy
+  - scikit-learn
+  - statsmodels
+  - lifelines
+  - matplotlib
+  - pyyaml
+  - requests
+  - anndata
+  - scanpy
+  - squidpy
+  - pip
+  - pip:
+      - openpyxl
+# NOTE: this run used the system Python 3.14 venv, not a conda env. Exact installed
+# versions are logged to outputs/logs/environment_lock.txt via `pip freeze` at runtime.
+# scanpy/squidpy may fail to build on Python 3.14; if so the spatial layer (M7) is
+# gated and logged in BLOCKERS.md rather than fabricated.
