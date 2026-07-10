@@ -1,0 +1,26 @@
+[
+  {
+    "cohort": "DepMap (venetoclax LN_IC50)",
+    "n": 116,
+    "spearman_rho": 0.3416798171686187,
+    "spearman_p": 0.00017419071141239501,
+    "exec_loss_tail": {
+      "called_median": 1.2973085,
+      "rest_median": 0.7604679999999999,
+      "mwu_p": 0.14437354640841044,
+      "n_called": 6
+    }
+  },
+  {
+    "cohort": "BeatAML (ex vivo venetoclax AUC)",
+    "n": 367,
+    "spearman_rho": 0.2330943773041126,
+    "spearman_p": 6.40612042192906e-06,
+    "exec_loss_tail": {
+      "called_median": 164.131414464674,
+      "rest_median": 157.889703605274,
+      "mwu_p": 0.32802894674995364,
+      "n_called": 3
+    }
+  }
+]
