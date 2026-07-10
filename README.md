@@ -40,6 +40,10 @@ See [`ARCHITECTURE.md`](ARCHITECTURE.md) for the full tech stack and how each pi
   *(core track; `scripts/08`)*
 - **Susceptibility score** tracks observed venetoclax resistance: DepMap ρ=0.34, BeatAML ρ=0.23.
   *(extended; F7, F8)*
+- **Calibrated "tipping point":** a bootstrapped decision boundary predicts venetoclax response
+  (DepMap AUC=0.75, BeatAML AUC=0.64), **driven by the guardian axis** (β CI excludes 0) with the
+  **executioner axis null** (β CI spans 0) — a real, data-calibrated threshold, not a fabricated
+  physical ratio. *(extended; F_tipping_point)*
 - **Three converging nulls** (M3 confounders, pan-BH3-mimetic MCL1i crux, ablation) show the
   executioner axis is orthogonal to measured venetoclax resistance. *(extended; F5, ablation, PANMIMETIC)*
 - **Spatial routing** on real 10x Human Lymph Node Visium: 16% "bypass-required" spots, per-spot
