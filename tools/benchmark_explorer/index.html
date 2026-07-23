@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ATAP benchmark explorer</title>
+<style>
+  :root{--bg:#faf9f7;--fg:#1a1a1a;--mut:#666;--card:#fff;--line:#e2e0dc;
+        --blue:#0072B2;--orange:#D55E00;--grey:#999;--band:#d9d9d9;}
+  @media (prefers-color-scheme:dark){:root{--bg:#16171a;--fg:#eee;--mut:#aaa;--card:#1f2125;--line:#33363c;--band:#3a3d43;}}
+  *{box-sizing:border-box}body{margin:0;font:15px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--fg)}
+  .wrap{max-width:920px;margin:0 auto;padding:20px}
+  h1{font-size:20px;margin:0 0 2px}.sub{color:var(--mut);font-size:13px;margin-bottom:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:16px}
+  select{font-size:15px;padding:6px 10px;border-radius:7px;border:1px solid var(--line);background:var(--card);color:var(--fg)}
+  .row{display:flex;align-items:center;gap:8px;margin:9px 0}
+  .lab{width:150px;font-size:12px;color:var(--mut);text-align:right;flex:none}
+  .track{position:relative;flex:1;height:26px;background:linear-gradient(90deg,transparent,transparent);border-left:1px solid var(--line);border-right:1px solid var(--line)}
+  .mid{position:absolute;left:50%;top:0;bottom:0;border-left:1px dashed var(--line)}
+  .band{position:absolute;top:4px;bottom:4px;background:var(--band);border-radius:3px;opacity:.7}
+  .bar{position:absolute;top:7px;height:12px;border-radius:3px}
+  .val{position:absolute;top:3px;font-size:11px;color:var(--fg)}
+  .verdict{font-size:12px;margin-left:6px}.win{color:var(--blue);font-weight:600}.fail{color:var(--orange)}
+  table{border-collapse:collapse;font-size:12px}td,th{border:1px solid var(--line);padding:4px 7px;text-align:center}
+  th{color:var(--mut);font-weight:600}.diag{color:var(--mut)}
+  .key{font-size:12px;color:var(--mut);margin-top:8px}
+  .big{font-size:14px;margin:0 0 4px}code{background:var(--band);padding:1px 5px;border-radius:4px;font-size:12px}
+</style></head><body><div class="wrap">
+<h1>ATAP benchmark explorer</h1>
+<div class="sub" id="meta"></div>
+
+<div class="card">
+  <p class="big"><b>The finding:</b> pick an axis and see how it does against real BH3-mimetic response.
+  Most candidate axes sit inside the grey <b>sham null band</b> on most specs — they don't survive scrutiny.</p>
+  <div class="row"><b>Axis:</b>&nbsp;<select id="sel"></select></div>
+  <div id="bars"></div>
+  <div class="key">Bar = Spearman &rho; (blue = clears the sham null band, orange = inside it).
+  Grey band = 95% permutation null. Center line = &rho;=0. Range shown: &minus;1 &hellip; +1.</div>
+</div>
+
+<div class="card">
+  <p class="big"><b>Inter-axis correlation</b> (Spearman) — how redundant the axes are with each other.</p>
+  <div style="overflow-x:auto"><table id="corr"></table></div>
+</div>
+
+<div class="card">
+  <p class="big"><b>Survival scoreboard</b> — specs each axis clears the sham null on.</p>
+  <div id="score"></div>
+  <div class="key">This scoreboard is the point: a real axis clears the null on most specs; a
+  weak or redundant axis clears few. No individual-level prediction is made anywhere in this tool.</div>
+</div>
+
+<script>
+const D = {"axes": ["composite", "BCL2_alone", "BCL2_minus_MCL1", "MCL1_over_BCL2L1", "monocytic_signature", "executioner_loss_score"], "specs": ["Venetoclax LN_IC50", "Venetoclax AUC", "Navitoclax LN_IC50", "Navitoclax AUC", "S63845 viability"], "effect": {"composite": {"Venetoclax LN_IC50": {"rho": -0.541, "n": 113, "null_lo": -0.184, "null_hi": 0.191, "survives": true}, "Venetoclax AUC": {"rho": -0.54, "n": 113, "null_lo": -0.181, "null_hi": 0.177, "survives": true}, "Navitoclax LN_IC50": {"rho": -0.442, "n": 115, "null_lo": -0.175, "null_hi": 0.174, "survives": true}, "Navitoclax AUC": {"rho": -0.407, "n": 115, "null_lo": -0.169, "null_hi": 0.178, "survives": true}, "S63845 viability": {"rho": -0.206, "n": 106, "null_lo": -0.185, "null_hi": 0.186, "survives": true}}, "BCL2_alone": {"Venetoclax LN_IC50": {"rho": -0.454, "n": 113, "null_lo": -0.186, "null_hi": 0.194, "survives": true}, "Venetoclax AUC": {"rho": -0.513, "n": 113, "null_lo": -0.173, "null_hi": 0.181, "survives": true}, "Navitoclax LN_IC50": {"rho": -0.452, "n": 115, "null_lo": -0.18, "null_hi": 0.187, "survives": true}, "Navitoclax AUC": {"rho": -0.415, "n": 115, "null_lo": -0.176, "null_hi": 0.186, "survives": true}, "S63845 viability": {"rho": -0.193, "n": 106, "null_lo": -0.201, "null_hi": 0.195, "survives": false}}, "BCL2_minus_MCL1": {"Venetoclax LN_IC50": {"rho": -0.636, "n": 113, "null_lo": -0.189, "null_hi": 0.191, "survives": true}, "Venetoclax AUC": {"rho": -0.663, "n": 113, "null_lo": -0.196, "null_hi": 0.187, "survives": true}, "Navitoclax LN_IC50": {"rho": -0.699, "n": 115, "null_lo": -0.184, "null_hi": 0.183, "survives": true}, "Navitoclax AUC": {"rho": -0.658, "n": 115, "null_lo": -0.182, "null_hi": 0.182, "survives": true}, "S63845 viability": {"rho": -0.08, "n": 106, "null_lo": -0.183, "null_hi": 0.199, "survives": false}}, "MCL1_over_BCL2L1": {"Venetoclax LN_IC50": {"rho": 0.048, "n": 113, "null_lo": -0.172, "null_hi": 0.187, "survives": false}, "Venetoclax AUC": {"rho": 0.076, "n": 113, "null_lo": -0.185, "null_hi": 0.184, "survives": false}, "Navitoclax LN_IC50": {"rho": 0.538, "n": 115, "null_lo": -0.179, "null_hi": 0.175, "survives": true}, "Navitoclax AUC": {"rho": 0.53, "n": 115, "null_lo": -0.184, "null_hi": 0.173, "survives": true}, "S63845 viability": {"rho": -0.24, "n": 106, "null_lo": -0.194, "null_hi": 0.18, "survives": true}}, "monocytic_signature": {"Venetoclax LN_IC50": {"rho": -0.002, "n": 113, "null_lo": -0.184, "null_hi": 0.198, "survives": false}, "Venetoclax AUC": {"rho": -0.009, "n": 113, "null_lo": -0.185, "null_hi": 0.197, "survives": false}, "Navitoclax LN_IC50": {"rho": -0.118, "n": 115, "null_lo": -0.191, "null_hi": 0.2, "survives": false}, "Navitoclax AUC": {"rho": -0.141, "n": 115, "null_lo": -0.186, "null_hi": 0.201, "survives": false}, "S63845 viability": {"rho": 0.115, "n": 106, "null_lo": -0.197, "null_hi": 0.193, "survives": false}}, "executioner_loss_score": {"Venetoclax LN_IC50": {"rho": -0.004, "n": 113, "null_lo": -0.181, "null_hi": 0.186, "survives": false}, "Venetoclax AUC": {"rho": 0.035, "n": 113, "null_lo": -0.181, "null_hi": 0.194, "survives": false}, "Navitoclax LN_IC50": {"rho": 0.034, "n": 115, "null_lo": -0.186, "null_hi": 0.17, "survives": false}, "Navitoclax AUC": {"rho": 0.065, "n": 115, "null_lo": -0.196, "null_hi": 0.178, "survives": false}, "S63845 viability": {"rho": 0.257, "n": 106, "null_lo": -0.198, "null_hi": 0.197, "survives": true}}}, "corr": {"composite": {"composite": 1.0, "BCL2_alone": 0.75, "BCL2_minus_MCL1": 0.66, "MCL1_over_BCL2L1": -0.03, "monocytic_signature": 0.09, "executioner_loss_score": -0.37}, "BCL2_alone": {"composite": 0.75, "BCL2_alone": 1.0, "BCL2_minus_MCL1": 0.72, "MCL1_over_BCL2L1": -0.0, "monocytic_signature": -0.11, "executioner_loss_score": -0.14}, "BCL2_minus_MCL1": {"composite": 0.66, "BCL2_alone": 0.72, "BCL2_minus_MCL1": 1.0, "MCL1_over_BCL2L1": -0.38, "monocytic_signature": 0.05, "executioner_loss_score": 0.1}, "MCL1_over_BCL2L1": {"composite": -0.03, "BCL2_alone": -0.0, "BCL2_minus_MCL1": -0.38, "MCL1_over_BCL2L1": 1.0, "monocytic_signature": -0.17, "executioner_loss_score": -0.1}, "monocytic_signature": {"composite": 0.09, "BCL2_alone": -0.11, "BCL2_minus_MCL1": 0.05, "MCL1_over_BCL2L1": -0.17, "monocytic_signature": 1.0, "executioner_loss_score": -0.08}, "executioner_loss_score": {"composite": -0.37, "BCL2_alone": -0.14, "BCL2_minus_MCL1": 0.1, "MCL1_over_BCL2L1": -0.1, "monocytic_signature": -0.08, "executioner_loss_score": 1.0}}, "meta": {"seed": 20260710, "cohort": "DepMap heme x GDSC2 (+PRISM S63845)", "note": "Aggregate axis behaviour only. No individual prediction. No clinical claim."}};
+document.getElementById('meta').textContent = D.meta.cohort + " — " + D.meta.note + " (seed " + D.meta.seed + ")";
+const sel = document.getElementById('sel');
+D.axes.forEach(a=>{const o=document.createElement('option');o.value=a;o.textContent=a;sel.appendChild(o);});
+function pct(v){return ((v+1)/2*100).toFixed(1)+'%';}          // map [-1,1] -> [0,100]%
+function width(v){return (Math.abs(v)/2*100).toFixed(1)+'%';}
+function drawBars(a){
+  const host=document.getElementById('bars');host.innerHTML='';
+  D.specs.forEach(s=>{
+    const e=D.effect[a][s]; if(!e) return;
+    const row=document.createElement('div');row.className='row';
+    const lab=document.createElement('div');lab.className='lab';lab.textContent=s+' (n='+e.n+')';
+    const tr=document.createElement('div');tr.className='track';
+    const mid=document.createElement('div');mid.className='mid';tr.appendChild(mid);
+    const band=document.createElement('div');band.className='band';
+    band.style.left=pct(e.null_lo);band.style.width=(Math.abs(e.null_hi-e.null_lo)/2*100)+'%';tr.appendChild(band);
+    const bar=document.createElement('div');bar.className='bar';
+    bar.style.background=e.survives?'var(--blue)':'var(--orange)';
+    if(e.rho>=0){bar.style.left='50%';bar.style.width=width(e.rho);}
+    else{bar.style.left=pct(e.rho);bar.style.width=width(e.rho);}
+    tr.appendChild(bar);
+    const val=document.createElement('div');val.className='val';val.textContent=(e.rho>0?'+':'')+e.rho;
+    val.style.left=e.rho>=0?'calc(50% + '+width(e.rho)+' + 4px)':'calc('+pct(e.rho)+' - 34px)';
+    tr.appendChild(val);
+    const vd=document.createElement('span');vd.className='verdict '+(e.survives?'win':'fail');
+    vd.textContent=e.survives?'clears null':'in null';
+    row.appendChild(lab);row.appendChild(tr);row.appendChild(vd);host.appendChild(row);
+  });
+}
+sel.addEventListener('change',()=>drawBars(sel.value));
+drawBars(D.axes[0]);
+// correlation matrix
+const ct=document.getElementById('corr');let h='<tr><th></th>';
+D.axes.forEach(a=>h+='<th>'+a.replace(/_/g,' ')+'</th>');h+='</tr>';
+D.axes.forEach(a=>{h+='<tr><th style="text-align:right">'+a.replace(/_/g,' ')+'</th>';
+  D.axes.forEach(b=>{const v=D.corr[a][b];const abs=Math.abs(v);
+    const bg=a===b?'transparent':'rgba(0,114,178,'+(abs*0.5)+')';
+    h+='<td class="'+(a===b?'diag':'')+'" style="background:'+bg+'">'+(a===b?'—':v.toFixed(2))+'</td>';});
+  h+='</tr>';});
+ct.innerHTML=h;
+// scoreboard
+const sc=document.getElementById('score');let sh='';
+D.axes.forEach(a=>{const specs=Object.values(D.effect[a]);const surv=specs.filter(e=>e.survives).length;
+  const frac=specs.length?surv/specs.length:0;
+  sh+='<div class="row"><div class="lab">'+a.replace(/_/g,' ')+'</div>'+
+      '<div class="track" style="border:none;background:var(--band);border-radius:5px">'+
+      '<div class="bar" style="left:0;top:3px;height:20px;border-radius:5px;background:'+
+      (frac>=0.5?'var(--blue)':'var(--orange)')+';width:'+(frac*100)+'%"></div></div>'+
+      '<span class="verdict">'+surv+'/'+specs.length+'</span></div>';});
+sc.innerHTML=sh;
+</script>
+</div></body></html>
