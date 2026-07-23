@@ -1,0 +1,78 @@
+# DATA_VERSIONS.lock — external dataset version pins for ATAP-M8 (issue #1)
+#
+# Every external dataset the pipeline consumes is pinned here to a specific release/version
+# string, access route, and (where a local file exists) download date + sha256 prefix from
+# data/raw/MANIFEST.md. This file is the machine-readable companion to MODEL_CARD.md and is
+# the reference the frozen tag (v1.0-frozen) points at. Regenerating any analysis MUST use
+# these exact versions; if a source publishes a newer release, bump here in a NEW commit and
+# re-run — never silently float to "latest".
+#
+# Format: one dataset per block. Fields are stable keys; values are exact strings.
+
+schema_version: 1
+frozen_on: 2026-07-23
+source_of_truth: config.yaml (data_releases, depmap_files, gdsc_*, beataml2_*, tcga_studies)
+
+datasets:
+
+  depmap:
+    name: DepMap Public 24Q4
+    release: "DepMap Public 24Q4"
+    source: figshare article 27993248 (https://ndownloader.figshare.com/files/<id>)
+    download_date: 2026-07-10
+    files:
+      Model.csv: {figshare_id: 51065297, sha256_12: b7a0c1385e6c}
+      OmicsExpressionProteinCodingGenesTPMLogp1.csv: {figshare_id: 51065489, sha256_12: 3580eeae2c52}
+      OmicsCNGene.csv: {figshare_id: 51065324, sha256_12: 5e6487bfbf01}
+      OmicsSomaticMutations.csv: {figshare_id: 51065732, sha256_12: 92e86ab6a845}
+      CRISPRGeneEffect.csv: {figshare_id: 51064667, sha256_12: null}   # present on disk; hash not in MANIFEST row
+    used_for: heme cell-line expression, copy number, somatic mutations, functional gene dependency
+
+  gdsc:
+    name: GDSC release-8.4 (fitted dose response 24Jul22)
+    release: "release-8.4"
+    source: Sanger FTP (https://ftp.sanger.ac.uk/pub/project/cancerrxgene/releases/release-8.4)
+    download_date: 2026-07-10
+    files:
+      GDSC2_fitted_dose_response_24Jul22.csv: {sha256_12: 9d6dc82b9a07}
+      GDSC1_fitted_dose_response_24Jul22.csv: {sha256_12: 7101736651d0}
+      screened_compounds_rel_8.4.csv: {sha256_12: d3cbb8b59598}
+      Cell_Lines_Details.xlsx: {sha256_12: 5520e779d254}
+    used_for: venetoclax + navitoclax dose-response (LN_IC50, AUC) on cell lines
+
+  beataml_cbioportal:
+    name: Beat AML (OHSU) via cBioPortal
+    release: "aml_ohsu_2022"
+    source: cBioPortal REST API (https://www.cbioportal.org/api)
+    download_date: live-fetch (panel genes only; no fixed file — pinned by study id)
+    used_for: real-patient expression + mutations cross-check
+
+  beataml2_native:
+    name: Beat AML 2.0 native data (biodev)
+    release: "beataml2.0_data @ github biodev/main"
+    source: https://github.com/biodev/beataml2.0_data/raw/main
+    download_date: 2026-07-10
+    files:
+      beataml_probit_curve_fits_v4_dbgap.txt: {note: venetoclax ex-vivo AUC (primary patient-level response)}
+    used_for: patient-level venetoclax ex-vivo response (F8 backbone)
+
+  tcga:
+    name: TCGA PanCancer Atlas (LAML, DLBC) via cBioPortal
+    release: "laml_tcga_pan_can_atlas_2018 + dlbc_tcga_pan_can_atlas_2018"
+    source: cBioPortal REST API
+    download_date: live-fetch (panel genes only — pinned by study id)
+    used_for: prevalence estimation of the executioner-loss phenotype (no venetoclax response)
+
+  spatial_visium:
+    name: 10x Human Lymph Node Visium (V1)
+    release: "Space Ranger 1.1.0 demo, V1_Human_Lymph_Node"
+    source: scanpy.datasets.visium_sge
+    download_date: 2026-07-10
+    files:
+      spatial_lymphnode.h5ad: {note: "4035 spots x 36601 genes; QC-passed; proof-of-concept lymphoid tissue (NOT marrow)"}
+    used_for: spatial routing proof-of-concept (M7); explicitly not a bone-marrow claim
+
+# Honesty note (GUARDRAILS): TCGA and the cBioPortal BeatAML study carry NO venetoclax
+# ex-vivo response; venetoclax validation uses GDSC (cell lines) + Beat AML 2.0 native
+# (patients). No dataset here establishes ATAP efficacy — all susceptibility outputs are
+# predicted-from-mechanism, not measured.
