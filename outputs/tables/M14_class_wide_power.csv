@@ -1,0 +1,7 @@
+drug,axis,n,power,rho,p_raw,note,p_holm,sig_holm,underpowered
+venetoclax,guardian_BCL2_minus_MCL1,113,0.901,-0.636,3.913785438151097e-14,,1.9568927190755484e-13,True,False
+venetoclax,executioner_loss_score,113,0.901,-0.004,0.9643628871792653,,1.0,False,False
+navitoclax,guardian_BCL2_minus_MCL1,115,0.906,-0.699,3.851095000809008e-18,,2.3106570004854048e-17,True,False
+navitoclax,executioner_loss_score,115,0.906,0.034,0.718308642344188,,1.0,False,False
+S63845,guardian_BCL2_minus_MCL1,106,0.881,-0.08,0.4128960883694188,,1.0,False,False
+S63845,executioner_loss_score,106,0.881,0.257,0.007731252857236311,,0.030925011428945243,True,False
